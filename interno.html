@@ -291,6 +291,10 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
         <input type="checkbox" name="parcial" id="parcial">
         <span><b>Aún no tengo todo.</b> Guardar igual con lo que hay: la cuenta queda en <b>Contactado</b>, no en Calificado. (Solo exige centro y un dato de contacto.)</span>
       </label>
+      <label class="in-toggle">
+        <input type="checkbox" name="mail_agenda" id="mail_agenda" checked>
+        <span><b>Mandarle el link de agenda por mail.</b> Si queda en Calificado sin fecha, el cliente recibe el mail para elegir hora. Desmárcalo si estás cerrando la hora tú en el chat.</span>
+      </label>
     </section>
 
     <!-- ========== C. Extra ========== -->
@@ -336,7 +340,7 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
         <label class="dm-field"><span>Sitio web</span><input type="url" name="web" placeholder="https://…"></label>
         <label class="dm-field"><span>Quién decide (si no es el contacto)</span><input type="text" name="decisor" placeholder="Nombre · rol"></label>
         <label class="dm-field"><span>Equipo del centro (personas)</span><input type="text" name="equipo_centro" placeholder="Ej: 4 profes, 1 recepción"></label>
-        <label class="dm-field"><span>Fecha y hora de la reunión (si ya quedó)</span><input type="datetime-local" name="fecha_reunion"></label>
+        <label class="dm-field"><span>Fecha y hora de la reunión (si ya quedó) · <a id="calLink" href="#" target="_blank" rel="noopener" hidden style="color:#016075;font-weight:600">ver horas disponibles ↗</a></span><input type="datetime-local" name="fecha_reunion"></label>
         <label class="dm-field"><span>Cuándo quiere partir</span>
           <select name="urgencia"><option value="">—</option><option>Este mes</option><option>1–3 meses</option><option>Más adelante</option><option>Solo mirando</option></select></label>
         <label class="dm-field dm-field-wide"><span>Cómo se enteró de Vita / cómo lo encontramos</span>
@@ -372,6 +376,7 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
       if(!j.ok){document.body.innerHTML='<p style="font-family:DM Sans,sans-serif;padding:40px;max-width:520px;margin:0 auto;font-size:17px">Link inválido. Pide el link correcto a Vita.</p>';return;}
       if(j.origen&&!qs.get('origen')){const b=document.querySelector('.dm-opts[data-key="origen"] .dm-opt[data-value="'+j.origen+'"]');if(b)b.click();}
       if(j.sdr&&!qs.get('sdr')){const i=document.querySelector('[name="sdr"]');if(i&&!i.value)i.value=j.sdr;}
+      if(j.calendar_url){const a=document.getElementById('calLink');a.href=j.calendar_url;a.hidden=false;}
     }catch(e){}
   })();
   const form=document.getElementById('inForm');
@@ -428,7 +433,7 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
   form.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',()=>{const f=el.closest('.dm-field');if(f)f.classList.remove('bad')}));
 
   function collect(){
-    const d={form_id:'interno-v1',k:KEY,idioma:'es',origen_raw:answers.origen||''};
+    const d={form_id:'interno-v1',k:KEY,mail_agenda:form.mail_agenda.checked,idioma:'es',origen_raw:answers.origen||''};
     if(ENDPOINT_PROD===''&&!ENDPOINT)d._dev='sin endpoint';
     ['dolores','actual','clientes'].forEach(k=>{if(answers[k]!=null)d[k]=answers[k]});
     form.querySelectorAll('input,select,textarea').forEach(f=>{if(f.type==='checkbox'){d[f.name]=f.checked;return}if(f.value.trim())d[f.name]=f.value.trim()});
