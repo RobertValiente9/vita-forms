@@ -1,204 +1,48 @@
-<!doctype html>
-<html lang="es">
+<!DOCTYPE html>
+<html lang="es-CL">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Vita · Form de demo (prueba)</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Vita | El equipo que opera tu gimnasio o centro wellness</title>
+<meta name="description" content="No es un software más ni una agencia: operamos tu centro completo. Recepción, ventas, cobros, boletas SII y marketing. +70 centros en Chile." />
+<meta name="keywords" content="software para gimnasios, software para centros wellness, sistema de reservas para gimnasios, software estudio de pilates, agenda online centro deportivo, CRM para gimnasios, cobro recurrente gimnasio, boleta electrónica gimnasio, app para gimnasios Chile" />
+<meta name="author" content="Vita" />
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
+<meta name="theme-color" content="#016075" />
+<meta name="format-detection" content="telephone=no" />
+<link rel="canonical" href="https://vita.lat/" />
+<link rel="alternate" hreflang="es" href="https://vita.lat/" />
+<link rel="alternate" hreflang="es-CL" href="https://vita.lat/" />
+<link rel="alternate" hreflang="en" href="https://vita.lat/en/" />
+<link rel="alternate" hreflang="x-default" href="https://vita.lat/" />
+
+<meta property="og:type" content="website" />
+<meta property="og:site_name" content="Vita" />
+<meta property="og:locale" content="es_CL" />
+<meta property="og:url" content="https://vita.lat/" />
+<meta property="og:title" content="Vita | El equipo que opera tu gimnasio o centro wellness" />
+<meta property="og:description" content="No es un software más ni una agencia: operamos tu centro completo. Recepción, ventas, cobros, boletas SII y marketing. +70 centros en Chile." />
+<meta property="og:image" content="https://vita.lat/assets/og-image.jpg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Vita, operamos tu centro wellness. Menos la clase." />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Vita | El equipo que opera tu gimnasio o centro wellness" />
+<meta name="twitter:description" content="No es un software más ni una agencia: operamos tu centro completo. Recepción, ventas, cobros, boletas SII y marketing. +70 centros en Chile." />
+<meta name="twitter:image" content="https://vita.lat/assets/og-image.jpg" />
+
+<link rel="icon" href="https://vita.lat/favicon.ico" sizes="48x48" />
+<link rel="icon" href="https://vita.lat/assets/icon-96.png" sizes="96x96" type="image/png" />
+<link rel="icon" href="https://vita.lat/assets/icon-192.png" sizes="192x192" type="image/png" />
+<link rel="apple-touch-icon" href="https://vita.lat/assets/apple-touch-icon.png" />
+<link rel="manifest" href="https://vita.lat/site.webmanifest" />
+
+<link rel="preload" as="font" type="font/woff2" href="https://vita.lat/assets/fonts/dmsans-latin.woff2" crossorigin />
+<link rel="preload" as="image" href="https://vita.lat/assets/hero-mesh.webp" fetchpriority="high" />
+<link rel="stylesheet" href="https://vita.lat/assets/vita.css" />
 <style>
-:root{
-    --primary:#016075;
-    --primary-h:#014A5A;
-    --primary-dark:#152b41;
-    --secondary:#84c3bf;
-    --ink:#1d1d1f;
-    --body:#585858;
-    --line:#e0e0e0;
-    --line-soft:rgba(1,96,117,.06);
-    --base:#f8f9fa;
-    --accent:#0E8A9E;
-    --glow:#84c3bf;
-
-    --maxw:1200px;
-    --pad-x:clamp(22px,5vw,56px);
-
-    --t-display:clamp(48px,7vw,100px);
-    --t-h2:clamp(32px,3.9vw,54px);
-    --t-h3:clamp(20px,1.75vw,25px);
-    --t-lead:clamp(18px,1.45vw,21px);
-    --t-body:clamp(15px,1.1vw,17px);
-    --t-small:clamp(12px,.85vw,13.5px);
-
-    --ease:cubic-bezier(.22,.61,.36,1);
-    --ease-out:cubic-bezier(.23,1,.32,1);
-    --ease-in-out:cubic-bezier(.77,0,.175,1);
-    --r-card:30px;
-    --shadow-soft:0 3px 8px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04),inset 1px 1px 1.5px rgba(255,255,255,.65),inset -1px -1px 1.5px rgba(0,0,0,.06),inset 0 0 0 1px rgba(255,255,255,.10);
-    --shadow-default:0 6px 14px rgba(0,0,0,.10),0 2px 4px rgba(0,0,0,.05),inset 1.5px 1.5px 2.5px rgba(255,255,255,.80),inset -1.5px -1.5px 3px rgba(0,0,0,.10),inset 0 0 0 1px rgba(255,255,255,.18);
-    --shadow-max:0 12px 28px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.10),0 1px 1px rgba(255,255,255,.10),inset 2px 2px 4px rgba(255,255,255,.90),inset -2px -2px 6px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.24),inset 0 -1px 0 rgba(0,0,0,.06);
-    --shadow-sm:var(--shadow-soft);
-    --shadow-mock:var(--shadow-default);
-  }
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.5em;
-    font-family:"DM Sans",sans-serif;font-weight:600;font-size:var(--t-body);letter-spacing:-.01em;
-    height:48px;padding:0 1.5rem;border:none;border-radius:1.5rem;cursor:pointer;color:#fff;overflow:hidden;
-    transition:transform .3s cubic-bezier(.4,0,.2,1),background .3s cubic-bezier(.4,0,.2,1),box-shadow .3s cubic-bezier(.4,0,.2,1);
-    white-space:nowrap}
-.btn::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
-    background:linear-gradient(135deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,.15) 30%,rgba(255,255,255,0) 55%,rgba(0,0,0,.05) 75%,rgba(0,0,0,.10) 100%);
-    transition:opacity .2s cubic-bezier(.4,0,.2,1)}
-.btn .arr{position:relative;z-index:1;transition:transform .3s cubic-bezier(.4,0,.2,1)}
-.btn:hover .arr{transform:translateX(3px)}
-.btn-primary{background:linear-gradient(145deg,#016075,#152b41);
-    box-shadow:0 2px 8px rgba(1,96,117,.25),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -1px 0 rgba(0,0,0,.12)}
-.btn-primary:hover{transform:translateY(-1px);background:linear-gradient(145deg,#84c3bf,#016075);
-    box-shadow:0 4px 12px rgba(1,96,117,.35),inset 0 1px 0 rgba(255,255,255,.40),inset 0 -1px 0 rgba(0,0,0,.15)}
-.btn-primary:active{transform:translateY(0);box-shadow:0 1px 3px rgba(1,96,117,.25),inset 0 1px 2px rgba(0,0,0,.20)}
-.btn-light{background:linear-gradient(145deg,#ffffff,#dbe7e9);color:var(--primary);
-    box-shadow:0 2px 8px rgba(0,30,36,.18),inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(0,0,0,.06)}
-.btn-light::before{background:linear-gradient(135deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.2) 32%,rgba(255,255,255,0) 58%,rgba(0,0,0,.03) 80%,rgba(0,0,0,.06) 100%)}
-.btn-light:hover{transform:translateY(-1px);background:linear-gradient(145deg,#ffffff,#cddde0);
-    box-shadow:0 4px 14px rgba(0,30,36,.24),inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(0,0,0,.08)}
-.btn-light:active{transform:translateY(0);box-shadow:0 1px 3px rgba(0,30,36,.2),inset 0 1px 2px rgba(0,0,0,.12)}
-.btn-ghost{background:linear-gradient(145deg,#f8f9fa,#e9ecef);color:var(--ink);border:1px solid var(--line);
-    box-shadow:0 2px 6px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(0,0,0,.05)}
-.btn-ghost::before{background:linear-gradient(135deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.18) 32%,rgba(255,255,255,0) 58%,rgba(0,0,0,.03) 80%,rgba(0,0,0,.06) 100%)}
-.btn-ghost:hover{transform:translateY(-1px);background:linear-gradient(145deg,#e9ecef,#dee2e6)}
-.btn-ghost:active{transform:translateY(0);box-shadow:0 1px 2px rgba(0,0,0,.1),inset 0 1px 2px rgba(0,0,0,.12)}
-.btn-light{margin-top:34px}
-.btn:active{transform:scale(.97)}
-.btn-primary:active,.btn-light:active,.btn-ghost:active{transform:scale(.97)}
-.btn::before{display:none}
-.btn{border-radius:980px;font-weight:500;letter-spacing:-.01em;height:46px;padding:0 1.35rem;
-    transition:background 200ms var(--ease-out),transform 120ms var(--ease-out),opacity 200ms var(--ease-out)}
-.btn-primary{background:var(--primary);box-shadow:none}
-.btn-primary:hover{background:var(--primary-h);transform:none}
-.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
-.btn-ghost:hover{background:rgba(0,0,0,.04);transform:none}
-.btn-light{background:#fff;color:#1d1d1f;box-shadow:none}
-.btn-light:hover{background:#e8e8ed;transform:none}
-.btn:active{transform:scale(.97)}
-.btn{flex:0 0 auto;min-width:0}
-/* ========== demo request flow ========== */
-  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
-body.dm-open{position:fixed;left:0;right:0;width:100%;overflow:hidden}
-.dm[hidden]{display:none}
-.dm{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,32px)}
-.dm-scrim{position:absolute;inset:0;background:rgba(10,40,48,.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
-    opacity:0;transition:opacity 170ms var(--ease-out)}
-.dm.in .dm-scrim{opacity:1;transition-duration:280ms}
-.dm-panel{position:relative;z-index:2;width:min(660px,100%);max-height:min(760px,92vh);display:flex;flex-direction:column;
-    background:linear-gradient(180deg,#FFFFFF 0%,#F6FBFC 100%);border:1px solid rgba(255,255,255,.8);border-radius:28px;overflow:hidden auto;
-    box-shadow:0 40px 80px -30px rgba(1,40,50,.45),0 2px 8px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.9);
-    opacity:0;transform:translateY(14px) scale(.985);
-    transition:opacity 170ms var(--ease-out),transform 170ms var(--ease-out)}
-.dm.in .dm-panel{opacity:1;transform:none;transition-duration:300ms}
-.dm-head{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:12px;padding:16px clamp(18px,3vw,28px) 12px;
-    background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.82));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
-.dm-brand{display:inline-flex;align-items:center;gap:8px;font-family:"DM Sans";font-weight:500;font-size:17px;letter-spacing:-.02em;color:var(--ink)}
-.dm-brand img{display:block;height:20px;width:auto}
-.dm-count{margin-left:auto;font-size:12.5px;font-weight:600;letter-spacing:.03em;color:#8fa7ac}
-.dm-x{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--body);cursor:pointer;
-    display:grid;place-items:center;transition:background .3s var(--ease),color .3s var(--ease)}
-.dm-x svg{width:15px;height:15px}
-.dm-x:hover{background:var(--base);color:var(--ink)}
-.dm-prog{position:sticky;top:62px;z-index:3;height:3px;background:rgba(1,96,117,.1)}
-.dm-bar{display:block;height:100%;width:0;border-radius:0 3px 3px 0;background:linear-gradient(90deg,#84c3bf,#016075);
-    transition:width 320ms var(--ease-out)}
-.dm-form{padding:clamp(22px,4vw,36px) clamp(18px,3vw,32px) 8px}
-.dm-step{display:none}
-.dm-step.on{display:block;animation:dmIn 260ms var(--ease-out) both}
-.dm-step.shake{animation:dmShake .38s}
-.dm-eyebrow{font-family:"DM Sans";font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
-.dm-q{font-family:"DM Sans";font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.025em;line-height:1.15;
-    margin-top:10px;text-wrap:balance}
-.dm-hint{font-size:var(--t-body);color:var(--body);line-height:1.5;margin-top:10px;max-width:46ch}
-.dm-opts{display:flex;flex-direction:column;gap:9px;margin-top:22px}
-.dm-opts-row{flex-direction:row;flex-wrap:wrap}
-.dm-opts-row .dm-opt{flex:1 1 152px}
-.dm-opts-2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
-.dm-opt{position:relative;text-align:left;font-family:"DM Sans";font-size:var(--t-body);font-weight:500;color:var(--ink);
-    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:15px 46px 15px 17px;cursor:pointer;
-    box-shadow:0 1px 2px rgba(0,0,0,.04);
-    transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease)}
-.dm-opt:hover{border-color:#a8cfd6;transform:translateY(-1px);box-shadow:0 4px 12px -6px rgba(1,60,73,.28)}
-.dm-opt::after{content:"";position:absolute;right:15px;top:50%;width:19px;height:19px;margin-top:-9.5px;border-radius:50%;
-    border:1.5px solid var(--line);transition:border-color .25s var(--ease),background .25s var(--ease)}
-.dm-opt.on{border-color:var(--primary);background:linear-gradient(180deg,rgba(132,195,191,.14),rgba(1,96,117,.07));font-weight:600}
-.dm-opt.on::after{border-color:var(--primary);background:var(--primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") 50%/11px no-repeat}
-.dm-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
-.dm-field{display:flex;flex-direction:column;gap:6px}
-.dm-field-wide{grid-column:1 / -1}
-.dm-field>span{font-family:"DM Sans";font-size:13px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
-.dm-field input,.dm-field textarea{font-family:"DM Sans";font-size:var(--t-body);color:var(--ink);background:#fff;
-    border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;width:100%;resize:vertical;
-    transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
-.dm-field input::placeholder,.dm-field textarea::placeholder{color:#b3c3c7}
-.dm-field input:focus,.dm-field textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(1,96,117,.12)}
-.dm-err{display:none;font-style:normal;font-size:12.5px;font-weight:500;color:#c0453c}
-.dm-field.bad input{border-color:#e0a09a}
-.dm-field.bad .dm-err{display:block}
-.dm-legal{margin-top:16px;font-size:12.5px;color:#8fa7ac;line-height:1.45}
-.dm-done{text-align:center;padding:14px 0 26px}
-.dm-check{display:grid;place-items:center;width:62px;height:62px;margin:0 auto 20px;border-radius:50%;color:#fff;
-    background:linear-gradient(145deg,#0a7e96,#016075);box-shadow:0 10px 24px -10px rgba(1,96,117,.6),inset 0 1px 0 rgba(255,255,255,.3);
-    animation:dmPop .5s var(--ease) both}
-.dm-check svg{width:28px;height:28px}
-.dm-done .dm-hint{margin-left:auto;margin-right:auto}
-.dm-done .dm-done-close{display:block;margin:14px auto 0;visibility:visible}
-.dm-done #dmDoneCta{display:inline-flex;text-decoration:none}
-.dm-close-btn{margin-top:24px}
-.dm-nav{position:sticky;bottom:0;display:flex;align-items:center;gap:12px;padding:14px clamp(18px,3vw,32px) 18px;
-    background:linear-gradient(180deg,rgba(246,251,252,.6),#F6FBFC 40%);border-top:1px solid var(--line-soft)}
-.dm-back{display:inline-flex;align-items:center;gap:6px;font-family:"DM Sans";font-size:var(--t-body);font-weight:600;
-    color:var(--body);background:none;border:0;cursor:pointer;padding:8px 4px;transition:color .25s var(--ease)}
-.dm-back svg{width:16px;height:16px}
-.dm-back:hover{color:var(--ink)}
-.dm-next{margin-left:auto;opacity:.45;pointer-events:none;transition:opacity .3s var(--ease)}
-.dm-next.is-ready{opacity:1;pointer-events:auto}
-/* ========== press feedback: the interface should feel like it heard you ========== */
-  .btn,.dm-opt,.vs-row,.faq-q,.lang a,.dm-x,.dm-back{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
-.dm-opt{transition:border-color 200ms var(--ease-out),background 200ms var(--ease-out),
-    transform 160ms var(--ease-out),box-shadow 200ms var(--ease-out)}
-.dm-opt:active{transform:scale(.985)}
-.dm-x:active{transform:scale(.94)}
-.layer h3,.step-card h3,.vcard-body h3,.incl-card h3,.hn h3,.act-copy h3,.dm-q{letter-spacing:-.026em}
-/* ---- the questionnaire, same language ---- */
-  .dm-scrim{background:rgba(0,0,0,.42);backdrop-filter:blur(12px) saturate(1.2);-webkit-backdrop-filter:blur(12px) saturate(1.2)}
-.dm-panel{border-radius:20px;border-color:var(--line);background:#fff;box-shadow:0 24px 64px rgba(0,0,0,.24)}
-.dm-head{background:#fff;padding-top:20px}
-.dm-count{margin-left:0;color:var(--body)}
-.dm-x{margin-left:auto;border-radius:980px;border-color:var(--line);background:#fff}
-.dm-prog{background:var(--line)}
-.dm-bar{background:var(--ink)}
-.dm-opt{border-radius:14px;border-width:1px;border-color:var(--line);box-shadow:none;font-weight:400}
-.dm-opt.on{border-color:var(--ink);background:#fff;font-weight:500}
-.dm-opt.on::after{border-color:var(--ink);background-color:var(--ink)}
-.dm-opt::after{border-color:var(--line)}
-.dm-field input,.dm-field textarea{border-radius:12px;border-width:1px}
-.dm-field input:focus,.dm-field textarea:focus{border-color:var(--ink);box-shadow:none}
-.dm-nav{background:#fff;border-top:1px solid var(--line)}
-.dm-check{background:var(--ink);box-shadow:none}
-.dm-eyebrow{letter-spacing:.04em;text-transform:none;font-size:13px;color:var(--body)}
-.dm-check{background:var(--grad-deep)}
-.dm-bar{background:linear-gradient(90deg,#84c3bf,#016075)}
-.dm-opt.on{border-color:var(--primary);background:linear-gradient(180deg,rgba(132,195,191,.13),rgba(1,96,117,.06))}
-.dm-opt.on::after{border-color:var(--primary);background-color:var(--primary)}
-.dm-field input:focus,.dm-field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(1,96,117,.12)}
-@media (max-width:560px){.dm{padding:0;align-items:flex-end}
-.dm-panel{width:100%;max-height:96vh;border-radius:26px 26px 0 0;transform:translateY(28px)}
-.dm-opts-2{grid-template-columns:1fr}
-.dm-fields{grid-template-columns:1fr}
-.dm-q{font-size:23px}}
-@media (prefers-reduced-motion:reduce){.dm-step.on,.dm-check{animation:none}
-.dm-panel,.dm-scrim{transition:none}}
-@media (hover:none){.btn:hover,.incl-card:hover,.vcard:hover,.layer:hover,.prob-card:hover,
-    .step-card:hover,.vs-row:hover,.dm-opt:hover{transform:none;box-shadow:inherit}}
-
-*{box-sizing:border-box;margin:0;padding:0}
+/* form de demo v2: ajustes sobre vita.css */
 [hidden]{display:none!important}
-/* --- altura estable entre pasos (v2) --- */
 .dm-step{padding-bottom:6px}
 @media (min-width:640px){
   .dm-form{min-height:min(460px,72vh);display:flex;flex-direction:column}
@@ -207,32 +51,586 @@ body.dm-open{position:fixed;left:0;right:0;width:100%;overflow:hidden}
   .dm-opt-wide{grid-column:1 / -1}
   .dm-opts-tall .dm-opt{min-height:84px}
 }
-/* --- solo para la página de prueba --- */
-body{margin:0;font-family:"DM Sans",sans-serif;background:var(--base);color:var(--ink)}
-.test-shell{max-width:760px;margin:0 auto;padding:40px 22px}
-.test-shell h1{font-size:22px;margin:0 0 6px}
-.test-shell p{color:var(--body);margin:0 0 14px;font-size:15px}
-.test-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 18px}
-.test-row input{flex:1;min-width:280px;height:40px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit}
-pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-size:12px;line-height:1.45;overflow:auto;max-height:340px;white-space:pre-wrap}
-.dbg-label{font-size:12px;font-weight:600;color:var(--body);margin:14px 0 4px;text-transform:uppercase;letter-spacing:.06em}
+.dm-done .dm-done-close{display:block;margin:14px auto 0;visibility:visible}
+.dm-done #dmDoneCta{display:inline-flex;text-decoration:none}
 </style>
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://vita.lat/#organization","name":"Vita","url":"https://vita.lat/","logo":{"@type":"ImageObject","url":"https://vita.lat/assets/icon-512.png","width":512,"height":512},"description":"No es un software más ni una agencia: operamos tu centro completo. Recepción, ventas, cobros, boletas SII y marketing. +70 centros en Chile.","email":"hola@vita.lat","areaServed":[{"@type":"Country","name":"Chile"},{"@type":"Place","name":"Latin America"}],"sameAs":["https://www.instagram.com/vita_software/","https://www.linkedin.com/company/usevita"]},{"@type":"WebSite","@id":"https://vita.lat/#website","url":"https://vita.lat/","name":"Vita","inLanguage":"es-CL","publisher":{"@id":"https://vita.lat/#organization"}},{"@type":"SoftwareApplication","@id":"https://vita.lat/#software","name":"Vita","applicationCategory":"BusinessApplication","operatingSystem":"Web, iOS, Android","url":"https://vita.lat/","inLanguage":"es-CL","description":"No es un software más ni una agencia: operamos tu centro completo. Recepción, ventas, cobros, boletas SII y marketing. +70 centros en Chile.","provider":{"@id":"https://vita.lat/#organization"},"featureList":["Agenda y reservas online","Cobros recurrentes y links de pago","Boletas electrónicas automáticas","Atención y ventas por WhatsApp e Instagram","CRM y campañas de Meta y Google","Fidelización y puntos","Reportes y metas por sucursal","App white-label para clientes"],"offers":{"@type":"Offer","priceCurrency":"CLP","availability":"https://schema.org/InStock","url":"https://vita.lat/#agenda"}}]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"¿Vita es un software o un servicio?","acceptedAnswer":{"@type":"Answer","text":"Los dos, y el orden importa. La plataforma es el piso. Encima hay un equipo que opera la recepción, las ventas y las campañas, y revisa los números contigo. Si solo quieres el software, hay opciones más baratas y te lo vamos a decir."}},{"@type":"Question","name":"¿En qué se diferencia de contratar una agencia de marketing?","acceptedAnswer":{"@type":"Answer","text":"Una agencia optimiza contra lo que puede ver: alcance, clics y leads. No tiene acceso a tus reservas ni a tus pagos, así que no puede decirte qué campaña trajo clientes que siguen pagando. Nosotros sí, porque esos datos pasan por nuestras manos."}},{"@type":"Question","name":"¿Quién le responde realmente a mis clientes?","acceptedAnswer":{"@type":"Answer","text":"La automatización toma la primera línea en WhatsApp e Instagram: disponibilidad, reserva, precios, estado del plan, link de pago. Lo que no debe contestar pasa a una persona de nuestro lado. Tú defines el tono y qué tiene que llegar siempre a un humano."}},{"@type":"Question","name":"¿Cobran las mensualidades solas?","acceptedAnswer":{"@type":"Answer","text":"Sí, con tarjeta inscrita, como una suscripción. También cobramos con links, por la app, con POS, efectivo y transferencia, y todo se concilia en un solo lugar."}},{"@type":"Question","name":"¿Emite boletas electrónicas válidas ante el SII?","acceptedAnswer":{"@type":"Answer","text":"Sí, se emiten en el instante en que entra el pago y quedan conciliadas por cliente y por plan."}},{"@type":"Question","name":"¿Qué pasa con los datos que tengo hoy?","acceptedAnswer":{"@type":"Answer","text":"Respaldamos todo primero y después migramos nosotros: clientes, clases, planes vigentes e historial. De ahí en adelante los datos son tuyos y exportables cuando los pidas."}},{"@type":"Question","name":"¿La app puede llevar mi marca?","acceptedAnswer":{"@type":"Answer","text":"Sí, publicada bajo tu nombre en App Store y Google Play, con tu logo y tus colores. Si después la quieres a la medida de tu centro, eso es un upgrade y nadie tiene que descargar nada de nuevo."}},{"@type":"Question","name":"Tengo más de un local. ¿Funciona?","acceptedAnswer":{"@type":"Answer","text":"Sí. Las reservas y los pagos quedan centralizados, con una vista para la central, permisos por rol y metas por sucursal."}},{"@type":"Question","name":"¿Cuánto cuesta y quedo amarrado?","acceptedAnswer":{"@type":"Answer","text":"Cotizamos según el tamaño de tu centro y cuánto de la operación nos entregas, sin cobro por usuario. Contrato mensual, sin permanencia. Agenda una demo y cotizamos tu caso con el alcance escrito."}}]}</script>
 </head>
 <body>
-
-<div class="test-shell">
-  <h1>Form de demo · página de prueba</h1>
-  <p>Mismo formulario que irá en vita.lat, con las preguntas acordadas. Pega la URL <code>/exec</code> de Apps Script (o déjala vacía para ver el payload sin enviar).</p>
-  <div class="test-row">
-    <input id="endpointInput" type="url" placeholder="https://script.google.com/macros/s/…/exec">
-    <button type="button" class="btn btn-primary" data-demo>Abrir formulario <span class="arr">&rarr;</span></button>
+<script>(function(){try{
+var BOT=/bot|crawl|spider|slurp|bingpreview|facebookexternalhit|embedly|quora|pinterest|whatsapp|telegram|preview/i;
+if(BOT.test(navigator.userAgent))return;
+var p=localStorage.getItem('vita-lang');
+if(p==='en'){void 0;return;}
+if(p)return;
+var l=(navigator.languages&&navigator.languages[0])||navigator.language||'es';
+if(!/^es/i.test(l))void 0;
+}catch(e){}})();</script>
+<!-- ===================== NAV ===================== -->
+<a class="skip-link" href="#main">Saltar al contenido</a>
+<header class="nav" id="nav">
+  <div class="wrap">
+    <div class="nav-inner">
+    <a href="#top" class="brand" aria-label="Vita"><img class="mark" src="https://vita.lat/assets/vita-mark.webp" width="26" height="24" alt="" aria-hidden="true" /><span class="wordmark">vita</span></a>
+    <nav class="nav-links" aria-label="Principal">
+      <a href="#equipo" class="lnk">Qué operamos</a>
+      <a href="#comparacion" class="lnk">La diferencia</a>
+      <a href="#cuenta" class="lnk">La cuenta</a>
+      <a href="#faq" class="lnk">Preguntas</a>
+      <span class="nav-lang" role="group" aria-label="Idioma">
+        <a href="https://vita.lat/" class="on" hreflang="es">ES</a>
+        <a href="https://vita.lat/en/" hreflang="en">EN</a>
+      </span>
+    </nav>
+    <div class="lang" role="group" aria-label="Idioma">
+      <a href="https://vita.lat/" class="on" hreflang="es">ES</a>
+      <a href="https://vita.lat/en/" hreflang="en">EN</a>
+    </div>
+    <span class="nav-gap" aria-hidden="true"></span>
+    <a href="https://app.vita.lat" class="btn btn-ghost nav-login">Iniciar sesión</a>
+    <a href="#agenda" data-demo class="btn btn-primary nav-cta">Agenda una demo</a>
+    <button class="menu-btn" id="menuBtn" aria-label="Menú" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
   </div>
-  <p style="font-size:13px">Tip: agrega <code>?utm_source=instagram&amp;utm_medium=dm</code> a la URL de esta página para probar la atribución.</p>
-  <div class="dbg-label">Payload enviado</div>
-  <pre class="dbg" id="dbgPayload">—</pre>
-  <div class="dbg-label">Respuesta de Apps Script</div>
-  <pre class="dbg" id="dbgResp">—</pre>
-</div>
+</header>
+
+<main id="main">
+
+<!-- ===================== HERO ===================== -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-color" aria-hidden="true"></div>
+  <div class="hero-sheen" aria-hidden="true"></div>
+  <div class="hero-veil" aria-hidden="true"></div>
+  <div class="hero-fade" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-copy">
+        <h1 class="display reveal">El equipo que <span class="accent">opera tu centro wellness.</span></h1>
+        <p class="subhead reveal">No es una app más que tienes que aprender. La operación de tu centro la hacemos nosotros: recepción, ventas, cobros y marketing.</p>
+        <div class="hero-cta reveal">
+          <a href="#agenda" data-demo class="btn btn-primary">Agenda una demo <span class="arr">&rarr;</span></a>
+          <a href="#equipo" class="btn btn-ghost hero-alt">Ver qué operamos</a>
+        </div>
+        <p class="microproof reveal"><span class="ck" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Migramos tus datos y lo dejamos andando. Tú no mueves un dedo.</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="hero-logos reveal">
+    <div class="wrap">
+      <div class="hero-logos-row">
+        <span class="hl-label"><b>+70</b> <span>centros</span></span>
+        <div class="marquee-mask">
+          <div class="marquee-track">
+            <span class="logo-item tall"><img src="https://vita.lat/assets/logos/nca.webp" width="110" height="99" alt="NCA" loading="lazy" decoding="async" /></span>
+            <span class="logo-item tall"><img src="https://vita.lat/assets/logos/habana.webp" width="68" height="105" alt="Habana Boxing" loading="lazy" decoding="async" /></span>
+            <span class="logo-item tall"><img src="https://vita.lat/assets/logos/roots.webp" width="110" height="110" alt="Roots" loading="lazy" decoding="async" /></span>
+            <span class="logo-item tall"><img src="https://vita.lat/assets/logos/virtualbike.webp" width="110" height="75" alt="Virtual Bike" loading="lazy" decoding="async" /></span>
+            <span class="logo-item"><img src="https://vita.lat/assets/logos/bodylab.webp" width="91" height="20" alt="body lab." loading="lazy" decoding="async" /></span>
+            <span class="logo-item tall"><img src="https://vita.lat/assets/logos/feelflow.webp" width="70" height="48" alt="feel &amp; flow" loading="lazy" decoding="async" /></span>
+            <span class="logo-item"><img src="https://vita.lat/assets/logos/beyou.webp" width="220" height="43" alt="BE YOU" loading="lazy" decoding="async" /></span>
+            <span class="logo-item"><img src="https://vita.lat/assets/logos/rcw.webp" width="187" height="64" alt="RCW" loading="lazy" decoding="async" /></span>
+            <span class="logo-item lg-sep"><span class="lg-dot"></span></span>
+            <span class="logo-item tall" aria-hidden="true"><img src="https://vita.lat/assets/logos/nca.webp" width="110" height="99" alt="" loading="lazy" decoding="async" /></span>
+            <span class="logo-item tall" aria-hidden="true"><img src="https://vita.lat/assets/logos/habana.webp" width="68" height="105" alt="" loading="lazy" decoding="async" /></span>
+            <span class="logo-item tall" aria-hidden="true"><img src="https://vita.lat/assets/logos/roots.webp" width="110" height="110" alt="" loading="lazy" decoding="async" /></span>
+            <span class="logo-item tall" aria-hidden="true"><img src="https://vita.lat/assets/logos/virtualbike.webp" width="110" height="75" alt="" loading="lazy" decoding="async" /></span>
+            <span class="logo-item" aria-hidden="true"><img src="https://vita.lat/assets/logos/bodylab.webp" width="91" height="20" alt="" loading="lazy" decoding="async" /></span>
+            <span class="logo-item tall" aria-hidden="true"><img src="https://vita.lat/assets/logos/feelflow.webp" width="70" height="48" alt="" loading="lazy" decoding="async" /></span>
+            <span class="logo-item" aria-hidden="true"><img src="https://vita.lat/assets/logos/beyou.webp" width="220" height="43" alt="" loading="lazy" decoding="async" /></span>
+            <span class="logo-item" aria-hidden="true"><img src="https://vita.lat/assets/logos/rcw.webp" width="187" height="64" alt="" loading="lazy" decoding="async" /></span>
+            <span class="logo-item lg-sep"><span class="lg-dot"></span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== THREE LAYERS ===================== -->
+<section class="block bg-soft" id="capas">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Cómo funciona</span>
+      <h2 class="h2">Una plataforma, automatización y un equipo. La tercera es la que nadie más te da.</h2>
+    </div>
+    <div class="layers">
+      <article class="layer reveal">
+        <span class="layer-n">01</span>
+        <h3>La plataforma</h3>
+        <p>Agenda, pagos, boletas, CRM, web y app. El piso, no el producto.</p>
+      </article>
+      <article class="layer reveal">
+        <span class="layer-n">02</span>
+        <h3>La automatización</h3>
+        <p>Responde, agenda, cobra y hace seguimiento sola, sin que nadie esté encima.</p>
+      </article>
+      <article class="layer reveal is-key">
+        <span class="layer-n">03</span>
+        <h3>El equipo</h3>
+        <p>Lo configuramos, operamos las ventas y las campañas, y revisamos los números contigo todos los meses.</p>
+      </article>
+    </div>
+    <p class="layers-note reveal"><b>Donde no hay nadie en el cargo, cubrimos el puesto. Donde ya tienes a alguien, lo respaldamos.</b></p>
+  </div>
+</section>
+
+<!-- ===================== WHAT WE RUN ===================== -->
+<section class="block" id="equipo">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Qué operamos</span>
+      <h2 class="h2">Cinco funciones que hoy caen sobre quien tenga un minuto libre.</h2>
+    </div>
+
+    <div class="act-rows">
+      <div class="act-row reveal">
+        <div class="act-copy">
+          <span class="act-step">01</span>
+          <h3>Recepción y agenda</h3>
+          <p class="desc">Contestamos WhatsApp e Instagram a toda hora. Agendamos, movemos y cancelamos con la disponibilidad real de tu centro, y sabemos quién está escribiendo.</p>
+        </div>
+        <div class="act-visual">
+          <div class="mock">
+            <div class="chat-body">
+              <div class="bub in"><span>hola, ¿queda reformer mañana en la tarde?</span><span class="ts">23:47</span></div>
+              <div class="bub out"><span>¡Hola Camila! Queda 18:30 y 19:30, y todavía tienes 4 clases en tu plan. ¿Cuál te reservo?</span><span class="ts">23:47 ✓✓</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="act-row flip reveal">
+        <div class="act-copy">
+          <span class="act-step">02</span>
+          <h3>Cobranza y boletas</h3>
+          <p class="desc">Cobro recurrente con tarjeta inscrita, links de pago, POS y transferencias. La boleta electrónica sale sola con cada pago, y nadie vuelve a perseguir una transferencia.</p>
+        </div>
+        <div class="act-visual">
+          <div class="mock inv">
+            <div class="inv-top">
+              <span class="inv-sii"><span>SII</span></span>
+              <span class="inv-emit">Emitida automáticamente</span>
+            </div>
+            <div class="inv-no"><span>Boleta electrónica</span> <b>N° 4821</b></div>
+            <div class="inv-amt"><span>$</span>42.000</div>
+            <div class="inv-div"></div>
+            <div class="inv-meta"><span>Cliente</span><b>Camila Reyes</b></div>
+            <div class="inv-meta"><span>Cobro</span><b>Recurrente</b></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="act-row reveal">
+        <div class="act-copy">
+          <span class="act-step">03</span>
+          <h3>Ventas y retención</h3>
+          <p class="desc">Cada consulta cae en el CRM y la seguimos hasta el plan pagado. Cuando alguien deja de venir, lo notamos antes de que se dé de baja y lo contactamos.</p>
+        </div>
+        <div class="act-visual">
+          <div class="mock wb">
+            <div class="wb-alert">
+              <div class="wa-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
+              <div class="wt"><b>Diego Soto</b> <span>no viene hace semanas</span></div>
+            </div>
+            <div class="bub out" style="max-width:100%;align-self:stretch"><span>Hola Diego, te guardé un cupo el jueves 19:00 si quieres retomar 💪</span></div>
+            <span class="wb-tag"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Cliente reactivado</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="act-row flip reveal">
+        <div class="act-copy">
+          <span class="act-step">04</span>
+          <h3>Marketing</h3>
+          <p class="desc">Operamos tus redes y tus campañas de Meta y Google, y seguimos al lead hasta el plan que contrató. Nada sale sin tu visto bueno.</p>
+        </div>
+        <div class="act-visual">
+          <div class="mock">
+            <div class="mock-bar"><span class="mb-title">Campaña, últimos 30 días</span></div>
+            <div class="funnel">
+              <div class="fn-row"><span class="fn-k">Clics</span><span class="fn-bar" style="--w:100%"></span><span class="fn-v">1.240</span></div>
+              <div class="fn-row"><span class="fn-k">Leads</span><span class="fn-bar" style="--w:62%"></span><span class="fn-v">184</span></div>
+              <div class="fn-row"><span class="fn-k">Prueba agendada</span><span class="fn-bar" style="--w:34%"></span><span class="fn-v">71</span></div>
+              <div class="fn-row is-end"><span class="fn-k">Plan pagado</span><span class="fn-bar" style="--w:19%"></span><span class="fn-v">29</span></div>
+            </div>
+            <div class="mock-foot"><span class="ck" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Una agencia llega hasta el lead. Nosotros vemos el plan pagado.</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="act-row flip reveal">
+        <div class="act-copy">
+          <span class="act-step">05</span>
+          <h3>Los números</h3>
+          <p class="desc">Cierre del mes, ocupación por horario y una reunión para decidir qué abrir, qué llenar y qué cerrar.</p>
+        </div>
+        <div class="act-visual">
+          <div class="mock">
+            <div class="mock-bar"><span class="mb-title">Ocupación por horario</span><span class="mb-right">Esta semana</span></div>
+            <div class="occ">
+              <div class="occ-row"><span class="occ-k">07:00</span><span class="occ-bar" style="--w:41%"></span><span class="occ-v">41%</span></div>
+              <div class="occ-row"><span class="occ-k">12:30</span><span class="occ-bar" style="--w:68%"></span><span class="occ-v">68%</span></div>
+              <div class="occ-row is-hot"><span class="occ-k">19:00</span><span class="occ-bar" style="--w:96%"></span><span class="occ-v">96%</span></div>
+              <div class="occ-row"><span class="occ-k">20:30</span><span class="occ-bar" style="--w:52%"></span><span class="occ-v">52%</span></div>
+            </div>
+            <div class="mock-foot"><span class="ck" aria-hidden="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span><span>Abrir un segundo 19:00. Mover el de las 07:00.</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BANDA · CONTENIDO ===================== -->
+<section class="band" id="contenido">
+  <img class="band-img" src="https://vita.lat/assets/photos/estudio.webp" width="2400" height="1000" alt="Sala de pilates con reformers" loading="lazy" decoding="async" />
+  <div class="band-tint" aria-hidden="true"></div>
+  <div class="wrap band-inner">
+    <span class="sec-eyebrow reveal">Contenido</span>
+    <h2 class="h2 reveal">Grabamos en tu local.</h2>
+    <p class="reveal">Clases, espacios, profesores. Editamos para cada canal y el material queda en tu carpeta, listo para usarlo donde quieras.</p>
+  </div>
+</section>
+
+<!-- ===================== COMPARISON ===================== -->
+<section class="block cmp-block bg-tint" id="comparacion">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">La diferencia</span>
+      <h2 class="h2">Cuatro proveedores. Ninguno ve el conjunto.</h2>
+      <p class="sec-sub">Cada uno cubre un pedazo y te devuelve el resto. En los huecos entre ellos es donde se va la plata.</p>
+    </div>
+
+    <div class="vs">
+      <div class="vs-row reveal">
+        <span class="vs-who">Una recepcionista</span>
+        <span class="vs-yes">Atiende y recibe en el local</span>
+        <span class="vs-no">Se va al cierre. No vende ni hace seguimiento.</span>
+      </div>
+      <div class="vs-row reveal">
+        <span class="vs-who">Un vendedor</span>
+        <span class="vs-yes">Cierra planes</span>
+        <span class="vs-no">No opera la agenda, ni los cobros, ni las boletas.</span>
+      </div>
+      <div class="vs-row reveal">
+        <span class="vs-who">Una agencia</span>
+        <span class="vs-yes">Campañas y contenido</span>
+        <span class="vs-no">Nunca ve tus reservas ni tus pagos, así que optimiza a ciegas.</span>
+      </div>
+      <div class="vs-row reveal">
+        <span class="vs-who">Un software de agenda</span>
+        <span class="vs-yes">Guarda la información</span>
+        <span class="vs-no">Alguien lo tiene que operar, y ese alguien eres tú.</span>
+      </div>
+      <div class="vs-row is-us reveal">
+        <span class="vs-who">Vita</span>
+        <span class="vs-yes">Todo lo anterior, operado por nosotros</span>
+        <span class="vs-no">Las reservas y los pagos pasan por nosotros, así que el marketing apunta a lo que realmente convierte.</span>
+      </div>
+    </div>
+
+    <p class="cmp-note reveal">Nadie optimiza bien una campaña sin saber qué clientes renovaron.</p>
+  </div>
+</section>
+
+<!-- ===================== THE MATH ===================== -->
+<section class="block" id="cuenta">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">La cuenta, honesta</span>
+      <h2 class="h2">Contratado por separado, esto son seis sueldos.</h2>
+      <p class="sec-sub">Valores de mercado en Chile, de referencia. Casi nadie contrata los seis, y ese es el problema real: los cargos que nadie ocupa no se hacen.</p>
+    </div>
+    <div class="roles reveal">
+      <div class="role-row"><span class="role-k">Recepción, un solo turno</span><span class="role-v">$480.000</span></div>
+      <div class="role-row"><span class="role-k">Cobranza y pagos</span><span class="role-v">$700.000</span></div>
+      <div class="role-row"><span class="role-k">Ventas</span><span class="role-v">$700.000 <em>+ comisiones</em></span></div>
+      <div class="role-row"><span class="role-k">Community y marketing</span><span class="role-v">$611.000</span></div>
+      <div class="role-row"><span class="role-k">Gerencia de operaciones</span><span class="role-v">$1.500.000+</span></div>
+      <div class="role-row"><span class="role-k">Equipo TI</span><span class="role-v">$1.000.000+</span></div>
+      <div class="role-row role-total"><span class="role-k">Al mes</span><span class="role-v">$4.991.000</span></div>
+    </div>
+    <p class="roles-note reveal">Vita cuesta una fracción de eso. Cotizamos cada centro según su tamaño y cuánto de la operación nos entrega, sin cobro por usuario.</p>
+  </div>
+</section>
+
+<!-- ===================== TOO GOOD TO BE TRUE ===================== -->
+<section class="block bg-glow" id="letrachica">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">La letra chica</span>
+      <h2 class="h2">«Esto suena demasiado bueno para ser verdad».</h2>
+      <p class="sec-sub">Nos lo dicen en toda primera reunión, así que acá van las respuestas antes de que preguntes.</p>
+    </div>
+    <div class="honest">
+      <div class="hn reveal">
+        <h3>¿Cómo cuesta menos que los seis sueldos?</h3>
+        <p>La plataforma absorbe lo repetitivo y el mismo equipo trabaja con varios centros. No pagas seis sueldos, pagas tu parte de un equipo que ya sabe hacer esto.</p>
+      </div>
+      <div class="hn reveal">
+        <h3>¿Es un bot el que le responde a mis clientes?</h3>
+        <p>La mayoría se resuelve sola. Lo que no debe contestar una máquina pasa a una persona de nuestro lado, con el contexto completo. El tono lo defines tú antes de que salga al aire.</p>
+      </div>
+      <div class="hn reveal">
+        <h3>¿Y si no me funciona?</h3>
+        <p>Contrato mensual, sin permanencia mínima. Tus datos son tuyos y exportables cuando los pidas.</p>
+      </div>
+      <div class="hn reveal">
+        <h3>¿Qué no hacen ustedes?</h3>
+        <p>La clase. Contratar a tu equipo. Definir tus precios, aunque recomendamos. Y nada se publica sin tu aprobación.</p>
+      </div>
+      <div class="hn reveal">
+        <h3>¿Tengo que migrar todo yo?</h3>
+        <p>No. La migración la hacemos nosotros, desde el respaldo hasta la capacitación. Tu equipo no llena una planilla.</p>
+      </div>
+      <div class="hn reveal">
+        <h3>¿Y después de que arranque?</h3>
+        <p>Tienes el mismo contacto todos los meses, por WhatsApp, y capacitación cada vez que entra alguien nuevo a tu equipo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== CLIENT APP ===================== -->
+<section class="block bg-tint" id="app">
+  <div class="wrap">
+    <div class="boutique-grid">
+      <div class="boutique-copy reveal">
+        <span class="sec-eyebrow">El piso, no el producto</span>
+        <h2 class="h2">Tus clientes entran a una app con tu nombre.</h2>
+        <p class="sec-sub">Tu comunidad no debería descargar la app de un tercero para reservar contigo. Sale bajo tu marca, en App Store y Google Play.</p>
+        <div class="feat-list">
+          <div class="feat"><span class="fk">1</span><span><b>Reservas como las de tu centro. </b><span class="ft-sub">Horarios fijos y variables, reserva recurrente, lista de espera y tus propias reglas de cancelación.</span></span></div>
+          <div class="feat"><span class="fk">2</span><span><b>Autogestión. </b><span class="ft-sub">El cliente agenda, cambia, cancela y paga solo.</span></span></div>
+          <div class="feat"><span class="fk">3</span><span><b>Fidelización con tu marca. </b><span class="ft-sub">Puntos, rachas y desafíos que traen gente de vuelta.</span></span></div>
+          
+        </div>
+      </div>
+      <div class="phone-wrap reveal">
+        <div class="phone">
+          <div class="phone-notch" aria-hidden="true"></div>
+          <div class="phone-screen">
+            <div class="appui">
+              <div class="app-head">
+                <span class="ah-logo">EC</span>
+                <span class="ah-name">Club Estadio Croata</span>
+                <svg class="ah-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8.5a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></svg>
+              </div>
+              <div class="app-dates">
+                <div class="dpill"><span class="dn">lun</span><span class="dd">8</span></div>
+                <div class="dpill"><span class="dn">mar</span><span class="dd">9</span></div>
+                <div class="dpill active"><span class="dn">mié</span><span class="dd">10</span></div>
+                <div class="dpill"><span class="dn">jue</span><span class="dd">11</span></div>
+                <div class="dpill"><span class="dn">vie</span><span class="dd">12</span></div>
+              </div>
+              <div class="app-filter"><span>Todas</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></div>
+              <div class="app-list">
+                <div class="app-card">
+                  <div class="ac-top"><span class="ac-time">19:00</span><span class="ac-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19c0-2.2-1.8-4-4-4s-4 1.8-4 4M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>4/20</span></div>
+                  <div class="ac-title">Hyrox</div>
+                  <div class="ac-coach">Deian Vojkovic</div>
+                  <div class="ac-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 11-8 11s-8-5-8-11a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.5"/></svg>Estadio Croata</div>
+                </div>
+                <div class="app-card">
+                  <div class="ac-top"><span class="ac-time">19:00</span><span class="ac-cap"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 19c0-2.2-1.8-4-4-4s-4 1.8-4 4M12 11.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5z"/></svg>11/12</span></div>
+                  <div class="ac-title">OT Fútbol</div>
+                  <div class="ac-coach">Diego Sánchez</div>
+                  <div class="ac-loc"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 11-8 11s-8-5-8-11a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="2.5"/></svg>Estadio Croata</div>
+                </div>
+              </div>
+              <div class="app-nav">
+                <span class="anav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5M5 10v10h14V10"/></svg><span>Inicio</span></span>
+                <span class="anav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/></svg><span>Reservas</span></span>
+                <span class="anav active"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="16" rx="2.5"/><path d="M3 9.5h18M8 2.5v4M16 2.5v4"/><path d="m8.5 14.5 2 2 4-4"/></svg><span>Agendar</span></span>
+                <span class="anav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M5 7h14l-1 13H6z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg><span>Planes</span></span>
+                <span class="anav"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="3.5"/><path d="M5 20c0-3.5 3-6 7-6s7 2.5 7 6"/></svg><span>Perfil</span></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== BANDA · DISCIPLINAS ===================== -->
+<section class="band band-mid" id="disciplinas">
+  <img class="band-img" src="https://vita.lat/assets/photos/f-boxeo.webp" width="1400" height="1200" alt="Gimnasio de boxeo" loading="lazy" decoding="async" />
+  <div class="band-tint" aria-hidden="true"></div>
+  <div class="wrap band-inner">
+    <span class="sec-eyebrow reveal">Disciplinas</span>
+    <h2 class="h2 reveal">Un box no se opera como un estudio de pilates.</h2>
+    <p class="reveal">Cupos por clase, puestos, bicicletas, sesiones uno a uno, evaluaciones. Ya operamos centros de cada una, así que la configuración parte de lo que tu disciplina realmente necesita.</p>
+  </div>
+</section>
+
+<!-- ===================== WHO IT'S FOR ===================== -->
+<section class="block bg-soft" id="centros">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">Para quién es</span>
+      <h2 class="h2">Para centros donde la administración cae sobre quien construyó la marca.</h2>
+      <p class="sec-sub">Pilates, yoga, funcional, boxeo, crossfit, barré, spinning, estética y kinesiología. Ya operamos centros de cada uno.</p>
+    </div>
+    <ul class="chips reveal">
+      <li>Pilates</li>
+      <li>Yoga</li>
+      <li>Funcional</li>
+      <li>Boxeo</li>
+      <li>Crossfit</li>
+      <li>Barré</li>
+      <li>Spinning</li>
+      <li>Estética</li>
+      <li>Kinesiología</li>
+      <li>Entrenamiento personal</li>
+    </ul>
+    <div class="verts-grid">
+      <article class="vcard reveal">
+        <div class="vcard-top"><span class="vcard-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20V9l8-5 8 5v11"/><path d="M9.5 20v-6h5v6"/></svg></span></div>
+        <div class="vcard-body">
+          <h3>Estudios independientes</h3>
+          <p>Pilates, yoga, barré, gimnasios boutique, boxeo y funcional. El dueño hace clases y además responde cada mensaje. Nos llevamos la segunda parte.</p>
+        </div>
+      </article>
+      <article class="vcard reveal">
+        <div class="vcard-top"><span class="vcard-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 21V8l6-4v17M15 21V10l6 4v7M3 21h18"/></svg></span></div>
+        <div class="vcard-body">
+          <h3>Cadenas y multi-sede</h3>
+          <p>Un mismo estándar en cada sucursal, una vista para la central y comisiones calculadas por clase efectivamente realizada.</p>
+        </div>
+      </article>
+      <article class="vcard reveal">
+        <div class="vcard-top"><span class="vcard-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7.5h18V20H3zM8 7.5V4h8v3.5"/><path d="M3 12.5h18"/></svg></span></div>
+        <div class="vcard-body">
+          <h3>Marcas con estudio</h3>
+          <p>Una tienda y un estudio bajo la misma marca. Conectamos los dos lados para que quien compra se haga cliente, y leemos ese cruce.</p>
+        </div>
+      </article>
+      <article class="vcard reveal">
+        <div class="vcard-top"><span class="vcard-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5.5v13M5.5 12h13"/><rect x="3" y="3" width="18" height="18" rx="5"/></svg></span></div>
+        <div class="vcard-body">
+          <h3>Centros clínicos y kinesiología</h3>
+          <p>Ficha del usuario, evaluaciones y seguimiento de progreso, junto a la agenda y los cobros.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== TESTIMONIAL ===================== -->
+<section class="block quote-band has-shot">
+  <img class="qshot" src="https://vita.lat/assets/photos/yoga.webp" width="2400" height="1000" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+  <div class="qglow" aria-hidden="true"></div>
+  <div class="wrap">
+    <figure class="quote-shell reveal">
+      <div class="quote-mark" aria-hidden="true">&ldquo;</div>
+      <blockquote class="quote-text">Pasamos de usar cuatro herramientas distintas a unificar todo en una. Vita elevó el nivel de nuestra operación automatizando procesos que antes eran manuales.</blockquote>
+      <figcaption class="quote-who">
+        <span class="quote-av">ME</span>
+        <span class="quote-meta">
+          <span class="quote-name">Marcelo Erazo</span>
+          <span class="quote-role">Gerente Comercial, NCA</span>
+        </span>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<!-- ===================== IMPLEMENTATION ===================== -->
+<section class="block" id="implementacion">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow">La puesta en marcha</span>
+      <h2 class="h2">La mudanza la hacemos nosotros.</h2>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card reveal">
+        <span class="step-n">01</span>
+        <h3>Levantamos tu centro</h3>
+        <p>Servicios, horarios, planes, precios y los casos raros. Respaldamos todo antes de tocar nada.</p>
+      </div>
+      <div class="step-card reveal">
+        <span class="step-n">02</span>
+        <h3>Movemos los datos</h3>
+        <p>Clientes, clases, planes vigentes e historial se pasan solos. Tu equipo no llena una planilla.</p>
+      </div>
+      <div class="step-card reveal">
+        <span class="step-n">03</span>
+        <h3>Capacitamos por rol</h3>
+        <p>Sesiones separadas para recepción, finanzas y profesores, presenciales u online, las que necesites.</p>
+      </div>
+      <div class="step-card reveal">
+        <span class="step-n">04</span>
+        <h3>Arranca</h3>
+        <p>El centro amanece operando en Vita, validado, con nosotros por WhatsApp desde el día uno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FAQ ===================== -->
+<section class="block faq bg-soft" id="faq">
+  <div class="wrap faq-grid2">
+    <div class="faq-aside reveal">
+      <span class="sec-eyebrow">Preguntas</span>
+      <h2 class="h2">Lo que nos preguntan antes de firmar.</h2>
+      <p class="faq-help">¿Te queda otra duda? <a href="#agenda" data-demo>Agenda una demo &rarr;</a></p>
+    </div>
+    <div class="faq-list reveal">
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">¿Vita es un software o un servicio?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">Los dos, y el orden importa. La plataforma es el piso. Encima hay un equipo que opera la recepción, las ventas y las campañas, y revisa los números contigo. Si solo quieres el software, hay opciones más baratas y te lo vamos a decir.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">¿En qué se diferencia de contratar una agencia de marketing?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">Una agencia optimiza contra lo que puede ver: alcance, clics y leads. No tiene acceso a tus reservas ni a tus pagos, así que no puede decirte qué campaña trajo clientes que siguen pagando. Nosotros sí, porque esos datos pasan por nuestras manos.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">¿Quién le responde realmente a mis clientes?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">La automatización toma la primera línea en WhatsApp e Instagram: disponibilidad, reserva, precios, estado del plan, link de pago. Lo que no debe contestar pasa a una persona de nuestro lado. Tú defines el tono y qué tiene que llegar siempre a un humano.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">¿Cobran las mensualidades solas?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">Sí, con tarjeta inscrita, como una suscripción. También cobramos con links, por la app, con POS, efectivo y transferencia, y todo se concilia en un solo lugar.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">¿Emite boletas electrónicas válidas ante el SII?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">Sí, se emiten en el instante en que entra el pago y quedan conciliadas por cliente y por plan.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">¿Qué pasa con los datos que tengo hoy?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">Respaldamos todo primero y después migramos nosotros: clientes, clases, planes vigentes e historial. De ahí en adelante los datos son tuyos y exportables cuando los pidas.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">¿La app puede llevar mi marca?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">Sí, publicada bajo tu nombre en App Store y Google Play, con tu logo y tus colores. Si después la quieres a la medida de tu centro, eso es un upgrade y nadie tiene que descargar nada de nuevo.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">Tengo más de un local. ¿Funciona?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">Sí. Las reservas y los pagos quedan centralizados, con una vista para la central, permisos por rol y metas por sucursal.</div></div></div>
+      </div>
+      <div class="faq-item">
+        <h3 class="faq-h"><button class="faq-q" aria-expanded="false"><span class="faq-qt">¿Cuánto cuesta y quedo amarrado?</span><span class="faq-chev" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></button></h3>
+        <div class="faq-a"><div class="faq-a-clip"><div class="faq-a-inner">Cotizamos según el tamaño de tu centro y cuánto de la operación nos entregas, sin cobro por usuario. Contrato mensual, sin permanencia. Agenda una demo y cotizamos tu caso con el alcance escrito.</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===================== FINAL CTA ===================== -->
+<section class="block cta-final" id="demo">
+  <div class="cta-grad" aria-hidden="true"></div>
+  <div class="wrap">
+    <h2 class="reveal">Veamos si calzamos.</h2>
+    <p class="reveal">Seis preguntas sobre tu centro, y volvemos con una demo armada sobre uno como el tuyo.</p>
+    <a href="#agenda" data-demo class="btn btn-light reveal">Agenda una demo <span class="arr">&rarr;</span></a>
+  </div>
+</section>
+
+</main>
 
 <!-- ===================== DEMO REQUEST FLOW ===================== -->
 <div class="dm" id="agenda" hidden>
@@ -343,7 +741,56 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
     </div>
   </div>
 </div>
+<div hidden aria-hidden="true"><input id="endpointInput"><pre id="dbgPayload"></pre><pre id="dbgResp"></pre></div>
 
+<!-- ===================== FOOTER ===================== -->
+<footer class="ft">
+  <div class="wrap">
+    <div class="ft-top">
+      <div class="ft-brand">
+        <a href="#top" class="brand" aria-label="Vita"><img class="mark" src="https://vita.lat/assets/vita-mark.webp" width="26" height="24" alt="" aria-hidden="true" /><span class="wordmark">vita</span></a>
+        <p class="ft-tag">La operación del día a día de tu centro, hecha por nosotros.</p>
+        <div class="ft-soc">
+          <a href="https://www.instagram.com/vita_software/" target="_blank" rel="noopener" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="2.5" width="19" height="19" rx="5.5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://www.linkedin.com/company/usevita" target="_blank" rel="noopener" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 9.5v9M4.5 5.6v.1M9.5 18.5v-9M9.5 13.2c0-2 1.4-3.7 3.5-3.7s3.5 1.7 3.5 3.7v5.3"/></svg></a>
+        </div>
+      </div>
+      <div class="ft-col">
+        <h2>Qué operamos</h2>
+        <ul>
+          <li><a href="#equipo">Recepción y agenda</a></li>
+          <li><a href="#equipo">Cobranza y boletas</a></li>
+          <li><a href="#equipo">Ventas y marketing</a></li>
+          <li><a href="#app">Tu propia app</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h2>Para decidir</h2>
+        <ul>
+          <li><a href="#comparacion">Versus software y agencias</a></li>
+          <li><a href="#cuenta">La cuenta</a></li>
+          <li><a href="#letrachica">La letra chica</a></li>
+          <li><a href="#implementacion">La puesta en marcha</a></li>
+        </ul>
+      </div>
+      <div class="ft-col">
+        <h2>Empresa</h2>
+        <ul>
+          <li><a href="#agenda" data-demo>Agenda una demo</a></li>
+          <li><a href="https://app.vita.lat">Iniciar sesión</a></li>
+          <li><a href="mailto:hola@vita.lat">Contacto</a></li>
+        </ul>
+        <a href="mailto:hola@vita.lat" class="ft-mail">hola@vita.lat</a>
+      </div>
+    </div>
+    <div class="ft-bot">
+      <span>© 2026 Vita. Todos los derechos reservados.</span>
+      <span class="ft-loc">Hecho en Chile, para Latinoamérica.</span>
+    </div>
+  </div>
+</footer>
+
+<script src="vita-demo.js" defer></script>
 <script>
 /* ---------- demo request flow (v2: Apps Script + pasivos) ---------- */
 (function(){
