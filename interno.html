@@ -287,10 +287,6 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
           <button type="button" class="dm-opt" data-value="Más de 400">Más de 400</button>
         </div>
       </div>
-      <label class="in-toggle">
-        <input type="checkbox" name="parcial" id="parcial">
-        <span><b>Aún no tengo todo.</b> Guardar igual con lo que hay: la cuenta queda en <b>Contactado</b>, no en Calificado. (Solo exige centro y un dato de contacto.)</span>
-      </label>
       <div class="q">
         <span class="lbl">Reunión <span class="req-mark">*</span></span>
         <div class="dm-opts dm-opts-2" data-key="agenda" data-mode="single">
@@ -427,7 +423,7 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
       b.addEventListener('click',()=>{slotHours.querySelectorAll('.dm-opt').forEach(o=>o.classList.toggle('on',o===b));form.fecha_reunion.value=x.start;slotsMsg.textContent='';updateState()});slotHours.appendChild(b)})});
   function syncAgenda(){const a=answers.agenda;slotsBox.hidden=a!=='ahora';if(a!=='ahora'){form.fecha_reunion.value='';slotHours.querySelectorAll('.dm-opt').forEach(o=>o.classList.remove('on'))}}
 
-  const parcial=document.getElementById('parcial');
+  const parcial={checked:false};
   const stateHint=document.getElementById('stateHint');
   function derivedState(){
     if(form.fecha_reunion.value)return 'Reunión agendada';
@@ -435,7 +431,6 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
     return 'Calificado';
   }
   function updateState(){syncAgenda();stateHint.textContent=derivedState()}
-  parcial.addEventListener('change',updateState);
 
   function validate(){
     let ok=true;const p=parcial.checked;
