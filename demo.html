@@ -818,6 +818,14 @@ if(!/^es/i.test(l))void 0;
   const answers={};
   const last=steps.length-1;
   let i=Math.max(0,parseInt(qs.get('step')||'1',10)-1),sent=false,opener=null;
+  /* volver donde lo dejó (link del mail M6): respuestas y contacto pre-llenados */
+  (function(){
+    const multi=k=>{const v=qs.get(k);if(!v)return;answers[k]=v.split('|').filter(Boolean);
+      steps.forEach(s=>{if(s.dataset.key===k)s.querySelectorAll('.dm-opt').forEach(b=>{if(answers[k].includes(b.dataset.value))b.classList.add('on')})})};
+    multi('dolores');multi('actual');
+    if(qs.get('clientes')){answers.clientes=qs.get('clientes');steps.forEach(s=>{if(s.dataset.key==='clientes')s.querySelectorAll('.dm-opt').forEach(b=>b.classList.toggle('on',b.dataset.value===answers.clientes))})}
+    ['email','whatsapp','nombre','centro'].forEach(n=>{const v=qs.get(n);const f=form.querySelector('[name="'+n+'"]');if(v&&f)f.value=v});
+  })();
   const t=(es,en)=>isES?es:en;
 
   /* ---------- pasivos ---------- */
