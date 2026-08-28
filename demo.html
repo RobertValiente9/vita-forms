@@ -1,0 +1,539 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vita · Form de demo (prueba)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap">
+<style>
+:root{
+    --primary:#016075;
+    --primary-h:#014A5A;
+    --primary-dark:#152b41;
+    --secondary:#84c3bf;
+    --ink:#1d1d1f;
+    --body:#585858;
+    --line:#e0e0e0;
+    --line-soft:rgba(1,96,117,.06);
+    --base:#f8f9fa;
+    --accent:#0E8A9E;
+    --glow:#84c3bf;
+
+    --maxw:1200px;
+    --pad-x:clamp(22px,5vw,56px);
+
+    --t-display:clamp(48px,7vw,100px);
+    --t-h2:clamp(32px,3.9vw,54px);
+    --t-h3:clamp(20px,1.75vw,25px);
+    --t-lead:clamp(18px,1.45vw,21px);
+    --t-body:clamp(15px,1.1vw,17px);
+    --t-small:clamp(12px,.85vw,13.5px);
+
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --ease-out:cubic-bezier(.23,1,.32,1);
+    --ease-in-out:cubic-bezier(.77,0,.175,1);
+    --r-card:30px;
+    --shadow-soft:0 3px 8px rgba(0,0,0,.06),0 1px 2px rgba(0,0,0,.04),inset 1px 1px 1.5px rgba(255,255,255,.65),inset -1px -1px 1.5px rgba(0,0,0,.06),inset 0 0 0 1px rgba(255,255,255,.10);
+    --shadow-default:0 6px 14px rgba(0,0,0,.10),0 2px 4px rgba(0,0,0,.05),inset 1.5px 1.5px 2.5px rgba(255,255,255,.80),inset -1.5px -1.5px 3px rgba(0,0,0,.10),inset 0 0 0 1px rgba(255,255,255,.18);
+    --shadow-max:0 12px 28px rgba(0,0,0,.18),0 4px 10px rgba(0,0,0,.10),0 1px 1px rgba(255,255,255,.10),inset 2px 2px 4px rgba(255,255,255,.90),inset -2px -2px 6px rgba(0,0,0,.18),inset 0 0 0 1px rgba(255,255,255,.24),inset 0 -1px 0 rgba(0,0,0,.06);
+    --shadow-sm:var(--shadow-soft);
+    --shadow-mock:var(--shadow-default);
+  }
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:.5em;
+    font-family:"DM Sans",sans-serif;font-weight:600;font-size:var(--t-body);letter-spacing:-.01em;
+    height:48px;padding:0 1.5rem;border:none;border-radius:1.5rem;cursor:pointer;color:#fff;overflow:hidden;
+    transition:transform .3s cubic-bezier(.4,0,.2,1),background .3s cubic-bezier(.4,0,.2,1),box-shadow .3s cubic-bezier(.4,0,.2,1);
+    white-space:nowrap}
+.btn::before{content:"";position:absolute;inset:0;pointer-events:none;border-radius:inherit;
+    background:linear-gradient(135deg,rgba(255,255,255,.35) 0%,rgba(255,255,255,.15) 30%,rgba(255,255,255,0) 55%,rgba(0,0,0,.05) 75%,rgba(0,0,0,.10) 100%);
+    transition:opacity .2s cubic-bezier(.4,0,.2,1)}
+.btn .arr{position:relative;z-index:1;transition:transform .3s cubic-bezier(.4,0,.2,1)}
+.btn:hover .arr{transform:translateX(3px)}
+.btn-primary{background:linear-gradient(145deg,#016075,#152b41);
+    box-shadow:0 2px 8px rgba(1,96,117,.25),inset 0 1px 0 rgba(255,255,255,.25),inset 0 -1px 0 rgba(0,0,0,.12)}
+.btn-primary:hover{transform:translateY(-1px);background:linear-gradient(145deg,#84c3bf,#016075);
+    box-shadow:0 4px 12px rgba(1,96,117,.35),inset 0 1px 0 rgba(255,255,255,.40),inset 0 -1px 0 rgba(0,0,0,.15)}
+.btn-primary:active{transform:translateY(0);box-shadow:0 1px 3px rgba(1,96,117,.25),inset 0 1px 2px rgba(0,0,0,.20)}
+.btn-light{background:linear-gradient(145deg,#ffffff,#dbe7e9);color:var(--primary);
+    box-shadow:0 2px 8px rgba(0,30,36,.18),inset 0 1px 0 rgba(255,255,255,.9),inset 0 -1px 0 rgba(0,0,0,.06)}
+.btn-light::before{background:linear-gradient(135deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.2) 32%,rgba(255,255,255,0) 58%,rgba(0,0,0,.03) 80%,rgba(0,0,0,.06) 100%)}
+.btn-light:hover{transform:translateY(-1px);background:linear-gradient(145deg,#ffffff,#cddde0);
+    box-shadow:0 4px 14px rgba(0,30,36,.24),inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 0 rgba(0,0,0,.08)}
+.btn-light:active{transform:translateY(0);box-shadow:0 1px 3px rgba(0,30,36,.2),inset 0 1px 2px rgba(0,0,0,.12)}
+.btn-ghost{background:linear-gradient(145deg,#f8f9fa,#e9ecef);color:var(--ink);border:1px solid var(--line);
+    box-shadow:0 2px 6px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.8),inset 0 -1px 0 rgba(0,0,0,.05)}
+.btn-ghost::before{background:linear-gradient(135deg,rgba(255,255,255,.5) 0%,rgba(255,255,255,.18) 32%,rgba(255,255,255,0) 58%,rgba(0,0,0,.03) 80%,rgba(0,0,0,.06) 100%)}
+.btn-ghost:hover{transform:translateY(-1px);background:linear-gradient(145deg,#e9ecef,#dee2e6)}
+.btn-ghost:active{transform:translateY(0);box-shadow:0 1px 2px rgba(0,0,0,.1),inset 0 1px 2px rgba(0,0,0,.12)}
+.btn-light{margin-top:34px}
+.btn:active{transform:scale(.97)}
+.btn-primary:active,.btn-light:active,.btn-ghost:active{transform:scale(.97)}
+.btn::before{display:none}
+.btn{border-radius:980px;font-weight:500;letter-spacing:-.01em;height:46px;padding:0 1.35rem;
+    transition:background 200ms var(--ease-out),transform 120ms var(--ease-out),opacity 200ms var(--ease-out)}
+.btn-primary{background:var(--primary);box-shadow:none}
+.btn-primary:hover{background:var(--primary-h);transform:none}
+.btn-ghost{background:transparent;color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn-ghost:hover{background:rgba(0,0,0,.04);transform:none}
+.btn-light{background:#fff;color:#1d1d1f;box-shadow:none}
+.btn-light:hover{background:#e8e8ed;transform:none}
+.btn:active{transform:scale(.97)}
+.btn{flex:0 0 auto;min-width:0}
+/* ========== demo request flow ========== */
+  .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+body.dm-open{position:fixed;left:0;right:0;width:100%;overflow:hidden}
+.dm[hidden]{display:none}
+.dm{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:clamp(12px,3vw,32px)}
+.dm-scrim{position:absolute;inset:0;background:rgba(10,40,48,.42);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+    opacity:0;transition:opacity 170ms var(--ease-out)}
+.dm.in .dm-scrim{opacity:1;transition-duration:280ms}
+.dm-panel{position:relative;z-index:2;width:min(660px,100%);max-height:min(760px,92vh);display:flex;flex-direction:column;
+    background:linear-gradient(180deg,#FFFFFF 0%,#F6FBFC 100%);border:1px solid rgba(255,255,255,.8);border-radius:28px;overflow:hidden auto;
+    box-shadow:0 40px 80px -30px rgba(1,40,50,.45),0 2px 8px rgba(0,0,0,.08),inset 0 1px 0 rgba(255,255,255,.9);
+    opacity:0;transform:translateY(14px) scale(.985);
+    transition:opacity 170ms var(--ease-out),transform 170ms var(--ease-out)}
+.dm.in .dm-panel{opacity:1;transform:none;transition-duration:300ms}
+.dm-head{position:sticky;top:0;z-index:3;display:flex;align-items:center;gap:12px;padding:16px clamp(18px,3vw,28px) 12px;
+    background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(255,255,255,.82));backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.dm-brand{display:inline-flex;align-items:center;gap:8px;font-family:"DM Sans";font-weight:500;font-size:17px;letter-spacing:-.02em;color:var(--ink)}
+.dm-brand img{display:block;height:20px;width:auto}
+.dm-count{margin-left:auto;font-size:12.5px;font-weight:600;letter-spacing:.03em;color:#8fa7ac}
+.dm-x{width:34px;height:34px;border-radius:11px;border:1px solid var(--line);background:#fff;color:var(--body);cursor:pointer;
+    display:grid;place-items:center;transition:background .3s var(--ease),color .3s var(--ease)}
+.dm-x svg{width:15px;height:15px}
+.dm-x:hover{background:var(--base);color:var(--ink)}
+.dm-prog{position:sticky;top:62px;z-index:3;height:3px;background:rgba(1,96,117,.1)}
+.dm-bar{display:block;height:100%;width:0;border-radius:0 3px 3px 0;background:linear-gradient(90deg,#84c3bf,#016075);
+    transition:width 320ms var(--ease-out)}
+.dm-form{padding:clamp(22px,4vw,36px) clamp(18px,3vw,32px) 8px}
+.dm-step{display:none}
+.dm-step.on{display:block;animation:dmIn 260ms var(--ease-out) both}
+.dm-step.shake{animation:dmShake .38s}
+.dm-eyebrow{font-family:"DM Sans";font-size:11.5px;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.dm-q{font-family:"DM Sans";font-size:clamp(22px,2.6vw,30px);font-weight:700;letter-spacing:-.025em;line-height:1.15;
+    margin-top:10px;text-wrap:balance}
+.dm-hint{font-size:var(--t-body);color:var(--body);line-height:1.5;margin-top:10px;max-width:46ch}
+.dm-opts{display:flex;flex-direction:column;gap:9px;margin-top:22px}
+.dm-opts-row{flex-direction:row;flex-wrap:wrap}
+.dm-opts-row .dm-opt{flex:1 1 152px}
+.dm-opts-2{display:grid;grid-template-columns:1fr 1fr;gap:9px}
+.dm-opt{position:relative;text-align:left;font-family:"DM Sans";font-size:var(--t-body);font-weight:500;color:var(--ink);
+    background:#fff;border:1.5px solid var(--line);border-radius:16px;padding:15px 46px 15px 17px;cursor:pointer;
+    box-shadow:0 1px 2px rgba(0,0,0,.04);
+    transition:border-color .25s var(--ease),background .25s var(--ease),transform .25s var(--ease),box-shadow .25s var(--ease)}
+.dm-opt:hover{border-color:#a8cfd6;transform:translateY(-1px);box-shadow:0 4px 12px -6px rgba(1,60,73,.28)}
+.dm-opt::after{content:"";position:absolute;right:15px;top:50%;width:19px;height:19px;margin-top:-9.5px;border-radius:50%;
+    border:1.5px solid var(--line);transition:border-color .25s var(--ease),background .25s var(--ease)}
+.dm-opt.on{border-color:var(--primary);background:linear-gradient(180deg,rgba(132,195,191,.14),rgba(1,96,117,.07));font-weight:600}
+.dm-opt.on::after{border-color:var(--primary);background:var(--primary) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fff' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 6 9 17l-5-5'/%3E%3C/svg%3E") 50%/11px no-repeat}
+.dm-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}
+.dm-field{display:flex;flex-direction:column;gap:6px}
+.dm-field-wide{grid-column:1 / -1}
+.dm-field>span{font-family:"DM Sans";font-size:13px;font-weight:600;color:var(--ink);letter-spacing:-.01em}
+.dm-field input,.dm-field textarea{font-family:"DM Sans";font-size:var(--t-body);color:var(--ink);background:#fff;
+    border:1.5px solid var(--line);border-radius:14px;padding:13px 15px;width:100%;resize:vertical;
+    transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.dm-field input::placeholder,.dm-field textarea::placeholder{color:#b3c3c7}
+.dm-field input:focus,.dm-field textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 3px rgba(1,96,117,.12)}
+.dm-err{display:none;font-style:normal;font-size:12.5px;font-weight:500;color:#c0453c}
+.dm-field.bad input{border-color:#e0a09a}
+.dm-field.bad .dm-err{display:block}
+.dm-legal{margin-top:16px;font-size:12.5px;color:#8fa7ac;line-height:1.45}
+.dm-done{text-align:center;padding:14px 0 26px}
+.dm-check{display:grid;place-items:center;width:62px;height:62px;margin:0 auto 20px;border-radius:50%;color:#fff;
+    background:linear-gradient(145deg,#0a7e96,#016075);box-shadow:0 10px 24px -10px rgba(1,96,117,.6),inset 0 1px 0 rgba(255,255,255,.3);
+    animation:dmPop .5s var(--ease) both}
+.dm-check svg{width:28px;height:28px}
+.dm-done .dm-hint{margin-left:auto;margin-right:auto}
+.dm-done .dm-done-close{display:block;margin:14px auto 0;visibility:visible}
+.dm-done #dmDoneCta{display:inline-flex;text-decoration:none}
+.dm-close-btn{margin-top:24px}
+.dm-nav{position:sticky;bottom:0;display:flex;align-items:center;gap:12px;padding:14px clamp(18px,3vw,32px) 18px;
+    background:linear-gradient(180deg,rgba(246,251,252,.6),#F6FBFC 40%);border-top:1px solid var(--line-soft)}
+.dm-back{display:inline-flex;align-items:center;gap:6px;font-family:"DM Sans";font-size:var(--t-body);font-weight:600;
+    color:var(--body);background:none;border:0;cursor:pointer;padding:8px 4px;transition:color .25s var(--ease)}
+.dm-back svg{width:16px;height:16px}
+.dm-back:hover{color:var(--ink)}
+.dm-next{margin-left:auto;opacity:.45;pointer-events:none;transition:opacity .3s var(--ease)}
+.dm-next.is-ready{opacity:1;pointer-events:auto}
+/* ========== press feedback: the interface should feel like it heard you ========== */
+  .btn,.dm-opt,.vs-row,.faq-q,.lang a,.dm-x,.dm-back{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
+.dm-opt{transition:border-color 200ms var(--ease-out),background 200ms var(--ease-out),
+    transform 160ms var(--ease-out),box-shadow 200ms var(--ease-out)}
+.dm-opt:active{transform:scale(.985)}
+.dm-x:active{transform:scale(.94)}
+.layer h3,.step-card h3,.vcard-body h3,.incl-card h3,.hn h3,.act-copy h3,.dm-q{letter-spacing:-.026em}
+/* ---- the questionnaire, same language ---- */
+  .dm-scrim{background:rgba(0,0,0,.42);backdrop-filter:blur(12px) saturate(1.2);-webkit-backdrop-filter:blur(12px) saturate(1.2)}
+.dm-panel{border-radius:20px;border-color:var(--line);background:#fff;box-shadow:0 24px 64px rgba(0,0,0,.24)}
+.dm-head{background:#fff;padding-top:20px}
+.dm-count{margin-left:0;color:var(--body)}
+.dm-x{margin-left:auto;border-radius:980px;border-color:var(--line);background:#fff}
+.dm-prog{background:var(--line)}
+.dm-bar{background:var(--ink)}
+.dm-opt{border-radius:14px;border-width:1px;border-color:var(--line);box-shadow:none;font-weight:400}
+.dm-opt.on{border-color:var(--ink);background:#fff;font-weight:500}
+.dm-opt.on::after{border-color:var(--ink);background-color:var(--ink)}
+.dm-opt::after{border-color:var(--line)}
+.dm-field input,.dm-field textarea{border-radius:12px;border-width:1px}
+.dm-field input:focus,.dm-field textarea:focus{border-color:var(--ink);box-shadow:none}
+.dm-nav{background:#fff;border-top:1px solid var(--line)}
+.dm-check{background:var(--ink);box-shadow:none}
+.dm-eyebrow{letter-spacing:.04em;text-transform:none;font-size:13px;color:var(--body)}
+.dm-check{background:var(--grad-deep)}
+.dm-bar{background:linear-gradient(90deg,#84c3bf,#016075)}
+.dm-opt.on{border-color:var(--primary);background:linear-gradient(180deg,rgba(132,195,191,.13),rgba(1,96,117,.06))}
+.dm-opt.on::after{border-color:var(--primary);background-color:var(--primary)}
+.dm-field input:focus,.dm-field textarea:focus{border-color:var(--primary);box-shadow:0 0 0 3px rgba(1,96,117,.12)}
+@media (max-width:560px){.dm{padding:0;align-items:flex-end}
+.dm-panel{width:100%;max-height:96vh;border-radius:26px 26px 0 0;transform:translateY(28px)}
+.dm-opts-2{grid-template-columns:1fr}
+.dm-fields{grid-template-columns:1fr}
+.dm-q{font-size:23px}}
+@media (prefers-reduced-motion:reduce){.dm-step.on,.dm-check{animation:none}
+.dm-panel,.dm-scrim{transition:none}}
+@media (hover:none){.btn:hover,.incl-card:hover,.vcard:hover,.layer:hover,.prob-card:hover,
+    .step-card:hover,.vs-row:hover,.dm-opt:hover{transform:none;box-shadow:inherit}}
+
+*{box-sizing:border-box;margin:0;padding:0}
+[hidden]{display:none!important}
+/* --- altura estable entre pasos (v2) --- */
+.dm-step{padding-bottom:6px}
+@media (min-width:640px){
+  .dm-form{min-height:min(460px,72vh);display:flex;flex-direction:column}
+  .dm-step.on{flex:1;display:flex;flex-direction:column}
+  .dm-step.on .dm-opts{margin-top:auto;margin-bottom:auto;padding:18px 0}
+  .dm-opt-wide{grid-column:1 / -1}
+  .dm-opts-tall .dm-opt{min-height:84px}
+}
+/* --- solo para la página de prueba --- */
+body{margin:0;font-family:"DM Sans",sans-serif;background:var(--base);color:var(--ink)}
+.test-shell{max-width:760px;margin:0 auto;padding:40px 22px}
+.test-shell h1{font-size:22px;margin:0 0 6px}
+.test-shell p{color:var(--body);margin:0 0 14px;font-size:15px}
+.test-row{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:10px 0 18px}
+.test-row input{flex:1;min-width:280px;height:40px;border:1px solid var(--line);border-radius:10px;padding:0 12px;font:inherit}
+pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-size:12px;line-height:1.45;overflow:auto;max-height:340px;white-space:pre-wrap}
+.dbg-label{font-size:12px;font-weight:600;color:var(--body);margin:14px 0 4px;text-transform:uppercase;letter-spacing:.06em}
+</style>
+</head>
+<body>
+
+<div class="test-shell">
+  <h1>Form de demo · página de prueba</h1>
+  <p>Mismo formulario que irá en vita.lat, con las preguntas acordadas. Pega la URL <code>/exec</code> de Apps Script (o déjala vacía para ver el payload sin enviar).</p>
+  <div class="test-row">
+    <input id="endpointInput" type="url" placeholder="https://script.google.com/macros/s/…/exec">
+    <button type="button" class="btn btn-primary" data-demo>Abrir formulario <span class="arr">&rarr;</span></button>
+  </div>
+  <p style="font-size:13px">Tip: agrega <code>?utm_source=instagram&amp;utm_medium=dm</code> a la URL de esta página para probar la atribución.</p>
+  <div class="dbg-label">Payload enviado</div>
+  <pre class="dbg" id="dbgPayload">—</pre>
+  <div class="dbg-label">Respuesta de Apps Script</div>
+  <pre class="dbg" id="dbgResp">—</pre>
+</div>
+
+<!-- ===================== DEMO REQUEST FLOW ===================== -->
+<div class="dm" id="agenda" hidden>
+  <div class="dm-scrim" data-dm-close aria-hidden="true"></div>
+  <div class="dm-panel" role="dialog" aria-modal="true" aria-labelledby="dmTitle">
+    <div class="dm-head">
+      <span class="dm-count" id="dmCount" aria-live="polite"></span>
+      <button type="button" class="dm-x" data-dm-close aria-label="Cerrar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg>
+      </button>
+    </div>
+    <div class="dm-prog" role="presentation"><span class="dm-bar" id="dmBar"></span></div>
+
+    <form class="dm-form" id="dmForm" novalidate>
+      <h2 id="dmTitle" class="sr-only">Solicita una demo</h2>
+
+      <section class="dm-step" data-key="dolores" data-mode="multi">
+        <span class="dm-eyebrow">Dónde duele</span>
+        <h3 class="dm-q">¿Qué te come la semana?</h3>
+        <p class="dm-hint">Marca todo lo que aplique. La demo va derecho a eso.</p>
+        <div class="dm-opts dm-opts-2">
+          <button type="button" class="dm-opt" data-value="Responder mensajes">Responder mensajes</button>
+          <button type="button" class="dm-opt" data-value="Cobrar y perseguir pagos">Cobrar y perseguir pagos</button>
+          <button type="button" class="dm-opt" data-value="Cuadrar la agenda">Cuadrar la agenda</button>
+          <button type="button" class="dm-opt" data-value="Boletas y contabilidad">Boletas y contabilidad</button>
+          <button type="button" class="dm-opt" data-value="Contenido y redes">Contenido y redes</button>
+          <button type="button" class="dm-opt" data-value="Que no se vayan los clientes">Que no se vayan los clientes</button>
+        </div>
+      </section>
+
+      <section class="dm-step" data-key="actual" data-mode="multi">
+        <span class="dm-eyebrow">Tu sistema hoy</span>
+        <h3 class="dm-q">¿Qué software no resuelve todos tus problemas?</h3>
+        <p class="dm-hint">Marca todos los que uses. La demo parte de lo que hoy no te resuelve.</p>
+        <div class="dm-opts dm-opts-2">
+          <button type="button" class="dm-opt" data-value="AgendaPro">AgendaPro</button>
+          <button type="button" class="dm-opt" data-value="BoxMagic">BoxMagic</button>
+          <button type="button" class="dm-opt" data-value="Fitco">Fitco</button>
+          <button type="button" class="dm-opt" data-value="Vambe">Vambe</button>
+          <button type="button" class="dm-opt" data-value="App propia">Una app propia</button>
+          <button type="button" class="dm-opt" data-value="Excel y WhatsApp">Excel y WhatsApp</button>
+          <button type="button" class="dm-opt" data-value="Ninguno">Ninguno todavía</button>
+          <button type="button" class="dm-opt" data-value="Otro">Otro</button>
+        </div>
+      </section>
+
+      <section class="dm-step" data-key="clientes" data-mode="single">
+        <span class="dm-eyebrow">Tu centro</span>
+        <h3 class="dm-q">¿Cuántos clientes activos, más o menos?</h3>
+        <p class="dm-hint">Un estimado basta. Nos sirve para dimensionar la implementación.</p>
+        <div class="dm-opts dm-opts-2 dm-opts-tall">
+          <button type="button" class="dm-opt" data-value="Menos de 50">Menos de 50</button>
+          <button type="button" class="dm-opt" data-value="50 a 150">50 a 150</button>
+          <button type="button" class="dm-opt" data-value="150 a 400">150 a 400</button>
+          <button type="button" class="dm-opt" data-value="Más de 400">Más de 400</button>
+        </div>
+      </section>
+
+      <section class="dm-step" data-key="contacto" data-mode="form">
+        <span class="dm-eyebrow">Casi listo</span>
+        <h3 class="dm-q">¿Dónde te contactamos?</h3>
+        <p class="dm-hint">Miramos tu centro antes de hablar, así la demo es sobre ti y no sobre nosotros.</p>
+        <div class="dm-fields">
+          <label class="dm-field">
+            <span>Tu nombre</span>
+            <input type="text" name="nombre" autocomplete="name" required placeholder="Camila Reyes" />
+            <em class="dm-err">Cuéntanos tu nombre</em>
+          </label>
+          <label class="dm-field">
+            <span>Nombre del centro</span>
+            <input type="text" name="centro" autocomplete="organization" required placeholder="Studio Pilates Ñuñoa" />
+            <em class="dm-err">Cuéntanos el nombre de tu centro</em>
+          </label>
+          <label class="dm-field">
+            <span>Email</span>
+            <input type="email" name="email" autocomplete="email" required placeholder="camila@tucentro.cl" />
+            <em class="dm-err">Revisa el correo</em>
+          </label>
+          <label class="dm-field">
+            <span>WhatsApp</span>
+            <input type="tel" name="whatsapp" autocomplete="tel" required placeholder="+56 9 1234 5678" />
+            <em class="dm-err">Agrega un número al que podamos escribir</em>
+          </label>
+          <label class="dm-field dm-field-wide">
+            <span>¿Algo que debamos saber? (opcional)</span>
+            <textarea name="nota" rows="2" placeholder="Abrimos una segunda sede en octubre…"></textarea>
+          </label>
+          <input type="text" name="botcheck" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true" />
+        </div>
+        <p class="dm-legal">Usamos esto solo para preparar tu demo. Sin spam ni reventa de tus datos.</p>
+      </section>
+
+      <section class="dm-step dm-done" data-key="done" data-mode="end">
+        <span class="dm-check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg></span>
+        <h3 class="dm-q" id="dmDoneTitle">Listo, ya lo tenemos.</h3>
+        <p class="dm-hint" id="dmDoneMsg">Elige ahora la hora de tu demo.</p>
+        <a class="btn btn-primary dm-close-btn" id="dmDoneCta" href="#" target="_blank" rel="noopener">Agendar mi demo →</a>
+        <button type="button" class="dm-back dm-done-close" data-dm-close>Cerrar</button>
+      </section>
+    </form>
+
+    <div class="dm-nav" id="dmNav">
+      <button type="button" class="dm-back" id="dmBack">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="m15 18-6-6 6-6"/></svg>
+        <span>Atrás</span>
+      </button>
+      <button type="button" class="btn btn-primary dm-next" id="dmNext">Continuar <span class="arr">&rarr;</span></button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- demo request flow (v2: Apps Script + pasivos) ---------- */
+(function(){
+  const root=document.getElementById('agenda');
+  if(!root)return;
+
+  /* En producción: const ENDPOINT='https://script.google.com/macros/s/XXXX/exec'; */
+  const qs=new URLSearchParams(location.search);
+  /* Link de agenda: fijo acá, o lo entrega el endpoint (GET → {calendar_url}). Vacío → "te llega por correo". */
+  let CALENDAR_URL='';
+  const endpointInput=document.getElementById('endpointInput');
+  endpointInput.value='https://script.google.com/macros/s/AKfycbzgOebpl4R4fWZ1ZC4ZG-0hdgaoCThcAAxaAsamalpJWfp3NMF5GDNab82pGbcKDnk3QQ/exec';
+  if(qs.has('endpoint'))endpointInput.value=qs.get('endpoint');
+  const getEndpoint=()=>endpointInput.value.trim();
+  (async()=>{try{const ep=getEndpoint();if(!ep||CALENDAR_URL)return;const j=await (await fetch(ep)).json();if(j.calendar_url)CALENDAR_URL=j.calendar_url;}catch(e){}})();
+
+  const form=document.getElementById('dmForm');
+  const steps=[...form.querySelectorAll('.dm-step')];
+  const bar=document.getElementById('dmBar');
+  const count=document.getElementById('dmCount');
+  const nav=document.getElementById('dmNav');
+  const back=document.getElementById('dmBack');
+  const next=document.getElementById('dmNext');
+  const isES=document.documentElement.lang.startsWith('es');
+  const answers={};
+  const last=steps.length-1;
+  let i=Math.max(0,parseInt(qs.get('step')||'1',10)-1),sent=false,opener=null;
+  const t=(es,en)=>isES?es:en;
+
+  /* ---------- pasivos ---------- */
+  const T0=Date.now();const stepT={};let backCount=0;
+  const ls=(k,v)=>{try{if(v===undefined)return JSON.parse(localStorage.getItem(k));localStorage.setItem(k,JSON.stringify(v))}catch(e){return null}};
+  const utmOf=url=>{const o={};try{new URL(url).searchParams.forEach((v,k)=>{if(/^(utm_|gclid|fbclid)/.test(k))o[k]=v})}catch(e){}return o};
+  (function(){
+    if(!ls('vita_ft'))ls('vita_ft',{...utmOf(location.href),referrer:document.referrer,landing:location.href,at:new Date().toISOString()});
+    ls('vita_lt',{...utmOf(location.href),referrer:document.referrer,at:new Date().toISOString()});
+    if(!ls('vita_sid'))ls('vita_sid',(crypto.randomUUID?crypto.randomUUID():String(Math.random()).slice(2)));
+    ls('vita_visits',(ls('vita_visits')||0)+1);
+  })();
+  const track=(name,params)=>{if(window.gtag)gtag('event',name,params);console.debug('[track]',name,params)};
+
+  function render(){
+    steps.forEach((s,n)=>s.classList.toggle('on',n===i));
+    const step=steps[i];
+    const end=step.dataset.mode==='end';
+    stepT[step.dataset.key]=stepT[step.dataset.key]||Date.now();
+    if(!end)track('form_step_view',{step:i+1,key:step.dataset.key});
+    nav.hidden=end;
+    back.hidden=i===0||end;
+    bar.style.width=(end?100:(i/last)*100)+'%';
+    count.textContent=end?'':t('Paso ','Step ')+(i+1)+t(' de ',' of ')+last;
+    next.classList.toggle('is-ready',ready());
+    if(step.dataset.mode==='form')next.innerHTML=t('Enviar','Send');
+    else next.innerHTML=t('Continuar','Continue')+' <span class="arr">&rarr;</span>';
+    const focusable=step.querySelector('.dm-opt,input,textarea,button');
+    if(focusable)setTimeout(()=>focusable.focus({preventScroll:true}),60);
+    root.querySelector('.dm-panel').scrollTop=0;
+  }
+  function ready(){
+    const step=steps[i];
+    if(step.dataset.mode==='form'||step.dataset.mode==='end')return true;
+    const v=answers[step.dataset.key];
+    return Array.isArray(v)?v.length>0:!!v;
+  }
+  function validate(){
+    const step=steps[i];
+    if(step.dataset.mode!=='form'){
+      if(!ready()){step.classList.add('shake');setTimeout(()=>step.classList.remove('shake'),400);return false}
+      return true;
+    }
+    let ok=true;
+    step.querySelectorAll('input[required]').forEach(inp=>{
+      const v=inp.value.trim();
+      const good=inp.type==='email'?/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v)
+        :inp.type==='tel'?v.replace(/\D/g,'').length>=8
+        :v.length>1;
+      inp.closest('.dm-field').classList.toggle('bad',!good);
+      if(!good&&ok){inp.focus();ok=false}
+    });
+    return ok;
+  }
+  function collect(){
+    const data={};
+    steps.forEach(s=>{const k=s.dataset.key;if(answers[k]!=null)data[k]=answers[k]});
+    form.querySelectorAll('input,textarea').forEach(f=>{if(f.value.trim())data[f.name]=f.value.trim()});
+    data.idioma=isES?'es':'en';
+    data.origen=location.href;
+    Object.assign(data,{
+      first_touch:ls('vita_ft')||{},last_touch:ls('vita_lt')||{},
+      referrer:document.referrer,landing_page:(ls('vita_ft')||{}).landing||'',
+      session_id:ls('vita_sid'),visitas_previas:ls('vita_visits')||1,
+      device:/Mobi|Android/i.test(navigator.userAgent)?'mobile':'desktop',
+      tiempo_total_seg:Math.round((Date.now()-T0)/1000),pasos_atras:backCount,
+      tiempo_por_paso:Object.fromEntries(Object.entries(stepT).map(([k,v])=>[k,Math.round((v-T0)/1000)]))
+    });
+    return data;
+  }
+
+  async function submit(){
+    if(sent)return;
+    sent=true;next.disabled=true;next.textContent=t('Enviando…','Sending…');
+    const data=collect();
+    document.getElementById('dbgPayload').textContent=JSON.stringify(data,null,2);
+    const ENDPOINT=getEndpoint();
+    let delivered=false,resp='(sin endpoint: no se envió)';
+    if(ENDPOINT){
+      try{
+        /* body como string sin headers → "simple request", sin preflight CORS */
+        const r=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify(data)});
+        const txt=await r.text();resp=txt;
+        let j={};try{j=JSON.parse(txt)}catch(e){}
+        delivered=r.ok&&j.ok!==false;
+      }catch(e){resp='ERROR: '+e.message}
+    }
+    document.getElementById('dbgResp').textContent=resp;
+    track('form_submit',{delivered});
+    doneScreen(delivered||!ENDPOINT,data.email);
+    next.disabled=false;i=last;render();
+  }
+  function doneScreen(ok,email){
+    const title=document.getElementById('dmDoneTitle'),msg=document.getElementById('dmDoneMsg'),cta=document.getElementById('dmDoneCta');
+    if(!ok){
+      title.textContent=t('Algo falló de nuestro lado.','Something went wrong on our side.');
+      msg.textContent=t('No pudimos registrar tu solicitud. Escríbenos a hola@vita.lat y te respondemos dentro de un día hábil.','We could not register your request. Email hola@vita.lat and we reply within one business day.');
+      cta.textContent='hola@vita.lat';cta.href='mailto:hola@vita.lat';cta.removeAttribute('target');return;
+    }
+    if(CALENDAR_URL){
+      msg.textContent=t('Elige ahora la hora de tu demo. Te mandamos el link también a '+email+'.','Pick your demo time now. We also sent the link to '+email+'.');
+      cta.textContent=t('Agendar mi demo →','Book my demo →');cta.href=CALENDAR_URL+(CALENDAR_URL.includes('?')?'&':'?')+'email='+encodeURIComponent(email);
+    }else{
+      msg.textContent=t('Te mandamos a '+email+' el link para elegir la hora de tu demo.','We sent the link to pick your demo time to '+email+'.');
+      cta.hidden=true;
+    }
+  }
+  function go(n){
+    if(n>i&&!validate())return;
+    if(n<i)backCount++;
+    i=Math.max(0,Math.min(last,n));
+    if(steps[i].dataset.mode==='end'&&!sent){submit();return}
+    render();
+  }
+
+  form.querySelectorAll('.dm-opt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const step=btn.closest('.dm-step');const key=step.dataset.key;
+      if(step.dataset.mode==='multi'){
+        const set=answers[key]=answers[key]||[];const v=btn.dataset.value;const at=set.indexOf(v);
+        if(at>-1)set.splice(at,1);else set.push(v);
+        btn.classList.toggle('on',at===-1);next.classList.toggle('is-ready',ready());
+      }else{
+        answers[key]=btn.dataset.value;
+        step.querySelectorAll('.dm-opt').forEach(o=>o.classList.toggle('on',o===btn));
+        setTimeout(()=>go(i+1),190);
+      }
+    });
+  });
+  form.querySelectorAll('.dm-field input').forEach(inp=>inp.addEventListener('input',()=>inp.closest('.dm-field').classList.remove('bad')));
+  form.addEventListener('submit',e=>{e.preventDefault();go(i+1)});
+  form.addEventListener('keydown',e=>{if(e.key==='Enter'&&e.target.tagName!=='TEXTAREA'){e.preventDefault();go(i+1)}});
+  next.addEventListener('click',()=>go(i+1));
+  back.addEventListener('click',()=>go(i-1));
+  /* Abandono con contacto: si escribió email o WhatsApp válido y se va sin enviar, se guarda como parcial (→ Contactado) */
+  let partialSent=false;
+  function sendPartial(){
+    if(sent||partialSent||root.hidden)return;
+    const f=n=>(form.querySelector('[name="'+n+'"]')||{}).value||'';
+    const okMail=/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(f('email').trim()), okTel=f('whatsapp').replace(/\D/g,'').length>=8;
+    if(!okMail&&!okTel)return;
+    partialSent=true;
+    const ENDPOINT=getEndpoint();if(!ENDPOINT)return;
+    const data=Object.assign(collect(),{form_id:'inbound-web-parcial',parcial:true,paso_abandono:steps[i].dataset.key});
+    try{navigator.sendBeacon(ENDPOINT,JSON.stringify(data))}catch(e){}
+  }
+  window.addEventListener('beforeunload',()=>{if(!root.hidden&&!sent)track('form_abandon',{step:i+1,seconds:Math.round((Date.now()-T0)/1000)});sendPartial()});
+  document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')sendPartial()});
+
+  function open(trigger){
+    opener=trigger||null;root.hidden=false;document.body.classList.add('dm-open');
+    requestAnimationFrame(()=>root.classList.add('in'));render();
+  }
+  function close(){sendPartial();
+    root.classList.remove('in');document.body.classList.remove('dm-open');
+    setTimeout(()=>{root.hidden=true},200);if(opener)opener.focus({preventScroll:true});
+    if(location.hash==='#agenda')history.replaceState(null,'',location.pathname+location.search);
+  }
+  document.querySelectorAll('[data-demo]').forEach(a=>a.addEventListener('click',e=>{e.preventDefault();open(a)}));
+  root.querySelectorAll('[data-dm-close]').forEach(b=>b.addEventListener('click',close));
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!root.hidden)close()});
+  if(location.hash==='#agenda')open(null);
+})();
+</script>
+</body>
+</html>
