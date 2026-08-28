@@ -291,10 +291,19 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
         <input type="checkbox" name="parcial" id="parcial">
         <span><b>Aún no tengo todo.</b> Guardar igual con lo que hay: la cuenta queda en <b>Contactado</b>, no en Calificado. (Solo exige centro y un dato de contacto.)</span>
       </label>
-      <label class="in-toggle">
-        <input type="checkbox" name="mail_agenda" id="mail_agenda" checked>
-        <span><b>Mandarle el link de agenda por mail.</b> Si queda en Calificado sin fecha, el cliente recibe el mail para elegir hora. Desmárcalo si estás cerrando la hora tú en el chat.</span>
-      </label>
+      <div class="q">
+        <span class="lbl">Reunión <span class="req-mark">*</span></span>
+        <div class="dm-opts dm-opts-2" data-key="agenda" data-mode="single">
+          <button type="button" class="dm-opt" data-value="ahora">Ya tengo hora con el cliente</button>
+          <button type="button" class="dm-opt" data-value="mail">Que el cliente elija desde su mail</button>
+        </div>
+        <div id="slots" hidden style="margin-top:14px">
+          <div class="dm-fields"><label class="dm-field"><span>Día (horas libres de Andrés)</span><select id="slotDay"><option value="">Cargando…</option></select></label></div>
+          <div class="dm-opts dm-opts-4" id="slotHours" style="margin-top:10px"></div>
+          <em id="slotsMsg" class="dm-hint" style="display:block;margin-top:8px"></em>
+          <input type="hidden" name="fecha_reunion">
+        </div>
+      </div>
     </section>
 
     <!-- ========== C. Extra ========== -->
@@ -340,7 +349,6 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
         <label class="dm-field"><span>Sitio web</span><input type="url" name="web" placeholder="https://…"></label>
         <label class="dm-field"><span>Quién decide (si no es el contacto)</span><input type="text" name="decisor" placeholder="Nombre · rol"></label>
         <label class="dm-field"><span>Equipo del centro (personas)</span><input type="text" name="equipo_centro" placeholder="Ej: 4 profes, 1 recepción"></label>
-        <label class="dm-field"><span>Fecha y hora de la reunión (si ya quedó) · <a id="calLink" href="#" target="_blank" rel="noopener" hidden style="color:#016075;font-weight:600">ver horas disponibles ↗</a></span><input type="datetime-local" name="fecha_reunion"></label>
         <label class="dm-field"><span>Cuándo quiere partir</span>
           <select name="urgencia"><option value="">—</option><option>Este mes</option><option>1–3 meses</option><option>Más adelante</option><option>Solo mirando</option></select></label>
         <label class="dm-field dm-field-wide"><span>Cómo se enteró de Vita / cómo lo encontramos</span>
@@ -376,7 +384,7 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
       if(!j.ok){document.body.innerHTML='<p style="font-family:DM Sans,sans-serif;padding:40px;max-width:520px;margin:0 auto;font-size:17px">Link inválido. Pide el link correcto a Vita.</p>';return;}
       if(j.origen&&!qs.get('origen')){const b=document.querySelector('.dm-opts[data-key="origen"] .dm-opt[data-value="'+j.origen+'"]');if(b)b.click();}
       if(j.sdr&&!qs.get('sdr')){const i=document.querySelector('[name="sdr"]');if(i&&!i.value)i.value=j.sdr;}
-      if(j.calendar_url){const a=document.getElementById('calLink');a.href=j.calendar_url;a.hidden=false;}
+      loadSlots();
     }catch(e){}
   })();
   const form=document.getElementById('inForm');
@@ -405,6 +413,20 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
   });
   if(pre.sdr)form.sdr.value=pre.sdr;
 
+  /* ---- horas libres de Andrés (desde el endpoint) ---- */
+  let SLOTS=[];const slotsBox=document.getElementById('slots'),slotDay=document.getElementById('slotDay'),slotHours=document.getElementById('slotHours'),slotsMsg=document.getElementById('slotsMsg');
+  async function loadSlots(){
+    try{const j=await (await fetch(ENDPOINT+'?slots=1&k='+encodeURIComponent(KEY))).json();
+      SLOTS=j.slots||[];slotDay.innerHTML='<option value="">Elige un día</option>';
+      const days=[...new Set(SLOTS.map(x=>x.day))];days.forEach(d=>{const o=document.createElement('option');o.value=d;o.textContent=SLOTS.find(x=>x.day===d).dayLabel;slotDay.appendChild(o)});
+      if(!days.length)slotsMsg.textContent='No hay horas libres en los próximos días. Elige «que el cliente elija desde su mail».';
+    }catch(e){slotsMsg.textContent='No pude cargar las horas. Intenta de nuevo.'}
+  }
+  slotDay.addEventListener('change',()=>{slotHours.innerHTML='';form.fecha_reunion.value='';updateState();
+    SLOTS.filter(x=>x.day===slotDay.value).forEach(x=>{const b=document.createElement('button');b.type='button';b.className='dm-opt';b.textContent=x.hour;
+      b.addEventListener('click',()=>{slotHours.querySelectorAll('.dm-opt').forEach(o=>o.classList.toggle('on',o===b));form.fecha_reunion.value=x.start;slotsMsg.textContent='';updateState()});slotHours.appendChild(b)})});
+  function syncAgenda(){const a=answers.agenda;slotsBox.hidden=a!=='ahora';if(a!=='ahora'){form.fecha_reunion.value='';slotHours.querySelectorAll('.dm-opt').forEach(o=>o.classList.remove('on'))}}
+
   const parcial=document.getElementById('parcial');
   const stateHint=document.getElementById('stateHint');
   function derivedState(){
@@ -412,19 +434,19 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
     if(parcial.checked)return 'Contactado';
     return 'Calificado';
   }
-  function updateState(){stateHint.textContent=derivedState()}
+  function updateState(){syncAgenda();stateHint.textContent=derivedState()}
   parcial.addEventListener('change',updateState);
-  form.fecha_reunion.addEventListener('change',updateState);
 
   function validate(){
     let ok=true;const p=parcial.checked;
-    const need=p?['origen']:['origen','clientes'];
+    const need=p?['origen']:['origen','clientes','agenda'];
     need.forEach(k=>{const v=answers[k];const good=Array.isArray(v)?v.length>0:!!v;
       const g=form.querySelector('.dm-opts[data-key="'+k+'"]');g.classList.toggle('bad',!good);if(!good)ok=false});
     const req=p?['sdr','centro']:['sdr','nombre','centro','email','whatsapp'];
     req.forEach(n=>{const inp=form[n];const v=inp.value.trim();
       const good=inp.type==='email'?/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v):inp.type==='tel'?v.replace(/\D/g,'').length>=8:v.length>1;
       inp.closest('.dm-field').classList.toggle('bad',!good);if(!good)ok=false});
+    if(!p&&answers.agenda==='ahora'&&!form.fecha_reunion.value){slotsMsg.textContent='Elige día y hora.';slotsBox.classList.add('bad');ok=false}
     if(p&&!(form.email.value.trim()||form.whatsapp.value.trim()||form.instagram.value.trim())){
       form.whatsapp.closest('.dm-field').classList.add('bad');ok=false;
     }
@@ -433,7 +455,7 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
   form.querySelectorAll('input,select,textarea').forEach(el=>el.addEventListener('input',()=>{const f=el.closest('.dm-field');if(f)f.classList.remove('bad')}));
 
   function collect(){
-    const d={form_id:'interno-v1',k:KEY,mail_agenda:form.mail_agenda.checked,idioma:'es',origen_raw:answers.origen||''};
+    const d={form_id:'interno-v1',k:KEY,mail_agenda:answers.agenda!=='ahora',idioma:'es',origen_raw:answers.origen||''};
     if(ENDPOINT_PROD===''&&!ENDPOINT)d._dev='sin endpoint';
     ['dolores','actual','clientes'].forEach(k=>{if(answers[k]!=null)d[k]=answers[k]});
     form.querySelectorAll('input,select,textarea').forEach(f=>{if(f.type==='checkbox'){d[f.name]=f.checked;return}if(f.value.trim())d[f.name]=f.value.trim()});
@@ -460,7 +482,7 @@ pre.dbg{background:#0f1b20;color:#cfe3e8;border-radius:12px;padding:14px;font-si
         j=JSON.parse(await r.text());
       }else{j={ok:true,issue:'(sin endpoint)',url:''}}
       if(j.ok){out.innerHTML='<div class="ok-msg">Guardado como <b>'+(j.state||data.estado_sugerido)+'</b> · '+(j.url?'<a href="'+j.url+'" target="_blank">'+j.issue+'</a>':j.issue)+(j.updated?' (cuenta existente, actualizada)':'')+'</div>';
-        form.reset();Object.keys(answers).forEach(k=>delete answers[k]);form.querySelectorAll('.dm-opt.on').forEach(b=>b.classList.remove('on'));updateState();}
+        form.reset();Object.keys(answers).forEach(k=>delete answers[k]);form.querySelectorAll('.dm-opt.on').forEach(b=>b.classList.remove('on'));slotHours.innerHTML='';slotDay.value='';updateState();}
       else out.innerHTML='<div class="err-msg">No se guardó: '+(j.error||'error desconocido')+'</div>';
     }catch(err){out.innerHTML='<div class="err-msg">Error: '+err.message+'</div>'}
     btn.disabled=false;btn.innerHTML='Guardar en Linear <span class="arr">&rarr;</span>';
