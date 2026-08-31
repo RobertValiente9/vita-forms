@@ -33,7 +33,7 @@ input:focus,select:focus{outline:none;border-color:var(--teal)}
   <div class="brand">VITA</div>
   <div id="pick">
     <h1>Agenda tu demo</h1>
-    <p class="sub">30 minutos por videollamada con Andrés, de Vita. Elige el día y la hora que te acomoden.</p>
+    <p class="sub" id="subTxt">30 minutos por videollamada con Andrés, de Vita. Elige el día y la hora que te acomoden.</p>
     <div id="emailWrap" hidden><label>Tu email</label><input type="email" id="email" placeholder="tu@centro.cl"></div>
     <label>Día</label><select id="day"><option value="">Cargando horas…</option></select>
     <label>Hora <span id="tz" style="font-weight:400;color:#9aa8ad">(hora de Chile)</span></label>
@@ -55,6 +55,7 @@ const qs=new URLSearchParams(location.search);
 let EMAIL=(qs.get('email')||'').trim(),SLOTS=[],SEL='';
 const day=document.getElementById('day'),hours=document.getElementById('hours'),go=document.getElementById('go'),msg=document.getElementById('msg');
 if(!EMAIL)document.getElementById('emailWrap').hidden=false; else{const e=document.getElementById('email');e.value=EMAIL}
+if(qs.get('nombre'))document.getElementById('subTxt').textContent=qs.get('nombre')+', son 30 minutos por videollamada con Andrés, de Vita. Elige el día y la hora que te acomoden.';
 async function load(){
   try{
     const j=await (await fetch(ENDPOINT+'?slots=1')).json();SLOTS=j.slots||[];
@@ -72,7 +73,7 @@ go.addEventListener('click',async()=>{
   if(!SEL){msg.textContent='Elige una hora.';return}
   go.disabled=true;go.textContent='Confirmando…';
   try{
-    const r=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify({form_id:'agenda-v1',email:EMAIL,fecha_reunion:SEL,origen:location.href})});
+    const r=await fetch(ENDPOINT,{method:'POST',body:JSON.stringify({form_id:'agenda-v1',email:EMAIL,nombre:qs.get('nombre')||'',fecha_reunion:SEL,origen:location.href})});
     const j=JSON.parse(await r.text());
     if(j.ok){document.getElementById('pick').hidden=true;document.getElementById('doneTxt').textContent=j.fecha;document.getElementById('done').hidden=false}
     else{msg.textContent=j.error||'No se pudo confirmar. Intenta otra hora.';go.disabled=false;go.textContent='Confirmar hora';load()}
