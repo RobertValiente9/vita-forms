@@ -805,7 +805,8 @@ if(!/^es/i.test(l))void 0;
   endpointInput.value='https://script.google.com/macros/s/AKfycbzgOebpl4R4fWZ1ZC4ZG-0hdgaoCThcAAxaAsamalpJWfp3NMF5GDNab82pGbcKDnk3QQ/exec';
   if(qs.has('endpoint'))endpointInput.value=qs.get('endpoint');
   const getEndpoint=()=>endpointInput.value.trim();
-  (async()=>{try{const ep=getEndpoint();if(!ep||CALENDAR_URL)return;const j=await (await fetch(ep)).json();if(j.calendar_url)CALENDAR_URL=j.calendar_url;}catch(e){}})();
+  let BOT_WA='';
+  (async()=>{try{const ep=getEndpoint();if(!ep)return;const j=await (await fetch(ep)).json();if(j.calendar_url&&!CALENDAR_URL)CALENDAR_URL=j.calendar_url;if(j.bot_whatsapp)BOT_WA=j.bot_whatsapp;}catch(e){}})();
 
   const form=document.getElementById('dmForm');
   const steps=[...form.querySelectorAll('.dm-step')];
@@ -921,9 +922,13 @@ if(!/^es/i.test(l))void 0;
   function doneScreen(ok,email){
     const title=document.getElementById('dmDoneTitle'),msg=document.getElementById('dmDoneMsg'),cta=document.getElementById('dmDoneCta');
     if(!ok){
-      title.textContent=t('Algo falló de nuestro lado.','Something went wrong on our side.');
-      msg.textContent=t('No pudimos registrar tu solicitud. Escríbenos a hola@vita.lat y te respondemos dentro de un día hábil.','We could not register your request. Email hola@vita.lat and we reply within one business day.');
-      cta.textContent='hola@vita.lat';cta.href='mailto:hola@vita.lat';cta.removeAttribute('target');return;
+      title.textContent=t('No pudimos enviar tu solicitud.','We could not send your request.');
+      msg.textContent=t('Puede ser la conexión. Inténtalo de nuevo'+(BOT_WA?' o escríbenos por WhatsApp.':' o escríbenos a hola@vita.lat.'),'It may be the connection. Try again'+(BOT_WA?' or write to us on WhatsApp.':' or email hola@vita.lat.'));
+      cta.hidden=false;cta.textContent=t('Intentar de nuevo','Try again');cta.href='#';cta.removeAttribute('target');
+      cta.onclick=e=>{e.preventDefault();sent=false;submit()};
+      const alt=BOT_WA||'mailto:hola@vita.lat';
+      msg.innerHTML=msg.textContent.replace(t('escríbenos por WhatsApp','write to us on WhatsApp'),'<a href="'+alt+'" target="_blank" rel="noopener" style="color:#016075;font-weight:600">'+t('escríbenos por WhatsApp','write to us on WhatsApp')+'</a>');
+      return;
     }
     if(CALENDAR_URL){
       msg.textContent=t('Elige ahora la hora de tu demo. Te mandamos el link también a '+email+'.','Pick your demo time now. We also sent the link to '+email+'.');
