@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es"><head><meta name="robots" content="noindex,nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Vita · Agenda tu demo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://assets.calendly.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap">
+<script src="assets/pixel.js" defer></script>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#016075;--ink:#17262b;--ink-2:#4a5c62;--line:#dde5e7;--bg:#f3f6f6}
+body{font-family:"DM Sans",system-ui,sans-serif;background:var(--bg);color:var(--ink);min-height:100vh;padding:24px 16px;font-size:16px;line-height:1.5}
+.card{background:#fff;border-radius:18px;max-width:1040px;margin:0 auto;padding:28px 22px 22px;box-shadow:0 18px 50px -22px rgba(1,60,73,.35)}
+h1{font-size:24px;letter-spacing:-.015em;margin-bottom:6px}
+.sub{color:var(--ink-2);font-size:15px;margin-bottom:14px;max-width:60ch}
+#cal{min-width:280px;height:720px;border-radius:12px;overflow:hidden}
+.alt{margin-top:10px;font-size:14px;color:var(--ink-2)}
+.alt a{color:var(--teal);font-weight:600}
+.foot{margin-top:18px;padding-top:14px;border-top:1px solid var(--line);font-size:12.5px;color:#9aa8ad}
+.foot b{color:var(--teal)}
+@media (max-width:640px){#cal{height:980px}.card{padding:22px 12px 16px}}
+</style></head><body>
+<div class="card">
+  <img src="logo.png" alt="Vita" style="height:34px;display:block;margin-bottom:16px">
+  <h1 id="t1">Agenda tu demo</h1>
+  <p class="sub" id="subTxt">30 minutos por videollamada con Andrés, de Vita. Elige el día y la hora que te acomoden; las horas se muestran en tu zona horaria.</p>
+  <div id="cal"></div>
+  <p class="alt" id="alt">¿No carga el calendario? <a id="altLink" href="#">Ábrelo en una pestaña nueva</a>.</p>
+  <div class="foot"><b>Vita</b> · El equipo que opera tu centro wellness. · vita.lat · hola@vita.lat</div>
+</div>
+<script src="https://assets.calendly.com/assets/external/widget.js"></script>
+<script>
+/* La agenda es Calendly (la herramienta de Andrés). Esta página solo la embebe, le pasa lo que ya
+   sabemos del lead (email, nombre) y la atribución (utm_* + fbclid en utm_term, porque Calendly solo
+   transporta utm_*), y dispara el pixel Schedule. El funnel se entera de la reserva leyendo Calendly. */
+const CAL_URL='https://calendly.com/robert-vita/demo-vita';
+const qs=new URLSearchParams(location.search);
+const LANG=((qs.get('lang')||'es')+'').toLowerCase().startsWith('en')?'en':'es';
+if(LANG==='en'){
+  document.documentElement.lang='en';
+  document.getElementById('t1').textContent='Book your demo';
+  document.getElementById('subTxt').textContent='A 30-minute video call with Andrés, from Vita. Pick the day and time that suit you; times are shown in your time zone.';
+  document.getElementById('alt').firstChild.textContent='Calendar not loading? ';
+  document.getElementById('altLink').textContent='Open it in a new tab';
+}
+let ft={};try{ft=JSON.parse(localStorage.getItem('vita_ft')||'{}')||{}}catch(e){}
+const pick=k=>(qs.get(k)||ft[k]||'').trim();
+const utm={utmSource:pick('utm_source'),utmMedium:pick('utm_medium'),utmCampaign:pick('utm_campaign'),utmContent:pick('utm_content'),utmTerm:(qs.get('utm_term')||qs.get('fbclid')||ft.fbclid||'').trim()};
+Object.keys(utm).forEach(k=>{if(!utm[k])delete utm[k]});
+const prefill={};
+if(qs.get('email'))prefill.email=qs.get('email').trim();
+const nombre=(qs.get('name')||qs.get('nombre')||'').trim();if(nombre)prefill.name=nombre;
+const url=CAL_URL+'?hide_gdpr_banner=1&primary_color=016075';
+const direct=new URL(CAL_URL);
+if(prefill.email)direct.searchParams.set('email',prefill.email);if(prefill.name)direct.searchParams.set('name',prefill.name);
+[['utm_source','utmSource'],['utm_medium','utmMedium'],['utm_campaign','utmCampaign'],['utm_content','utmContent'],['utm_term','utmTerm']].forEach(([a,b])=>{if(utm[b])direct.searchParams.set(a,utm[b])});
+document.getElementById('altLink').href=direct.toString();document.getElementById('altLink').target='_blank';document.getElementById('altLink').rel='noopener';
+if(window.Calendly)Calendly.initInlineWidget({url,parentElement:document.getElementById('cal'),prefill,utm});
+else document.getElementById('cal').style.display='none';
+/* Calendly avisa por postMessage cuando se confirma la reserva: pixel Schedule con el mismo event_id
+   (la URI del invitado) que manda el servidor por CAPI → Meta deduplica. */
+window.addEventListener('message',e=>{
+  if(!/calendly\.com$/.test((()=>{try{return new URL(e.origin).hostname}catch(x){return ''}})()))return;
+  if(e.data&&e.data.event==='calendly.event_scheduled'&&window.fbq){
+    const inv=(((e.data.payload||{}).invitee)||{}).uri||'';
+    fbq('track','Schedule',{},inv?{eventID:inv}:{});
+  }
+});
+</script></body></html>
